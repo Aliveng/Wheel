@@ -12,8 +12,11 @@ class FortuneWheelViewController: UIViewController {
     
     override func viewDidLoad() {
             super.viewDidLoad()
-            // Do any additional setup after loading the view.
+        
+        view.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        
             self.ShowFortuneWheel()
+        
         }
         
         //Assign the center CGPoint for the wheel and a diameter adn the slices it should show and conform to the protocol

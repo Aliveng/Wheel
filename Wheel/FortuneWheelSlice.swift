@@ -10,8 +10,6 @@ import UIKit
 
 class FortuneWheelSlice : CALayer
 {
-    typealias Radians = CGFloat
-    
     /**Angle where the slice begins*/
     private var startAngle : Radians!
     
@@ -48,6 +46,52 @@ class FortuneWheelSlice : CALayer
        /**The center position of the wheel*/
        let center = CGPoint.init(x: self.frame.width/2, y: self.frame.height/2)
        
+      //  #1
+           /**Rotated image*/
+          let image = self.slice.image.rotateImage(angle: self.startAngle)!
+                
+      //     #2
+           /**length of the third line in the isosceles triangle.Calculated using chord leghtn formula*/
+           let lineLegth = CGFloat((2 * radius * sin(self.sectorAngle/2)))
+             
+      //     #3
+           /**Half perimeter used for calculation of size*/
+           let s = (radius + radius + lineLegth)/2
+           
+      //     #4
+           /**size calcutations based on Incenter radius for isosceles triange formula. increased the size by 1.5 instead of 2(as the calculation gives radius and we need diameter) to adjust the image properly inside the slice.*/
+           let inCenterDiameter = ((s * (s - radius) * (s - radius) * (s - lineLegth)).squareRoot()/s) * 1.50
+                
+       //    #5
+           /**The size of the image Square*/
+           var size : CGFloat = 0
+        
+           /**Size for 180,120 adn 90 degrees is adjsted manually to properly uitlize the space*/
+           size = self.sectorAngle == Degree(180).toRadians() ? radius/2 : self.sectorAngle == Degree(120).toRadians() ?  radius/1.9 : self.sectorAngle == Degree(90).toRadians() ? radius/1.9 : inCenterDiameter
+                
+           /**Reducing the border width of the lines.in size*/
+           size -= self.slice.borderWidth * 3
+                
+           
+           /**Gap between chord and the circumference of the circle at the center of the sector.*/
+           let height = 2 * (1 - cos(self.sectorAngle/2))
+           
+     //      #6
+           /**X position of the Incenter of a isosceles triangle.Moved outside a bit to remove the Overlay of image over line.*/
+           let xIncenter = ((radius * radius) + ((radius * cos(self.sectorAngle)) * radius))/(radius + radius + lineLegth) + (size * 0.07)
+           
+     //      #7
+           /**Y position of the Incenter of a isosceles triangle*/
+           let yIncenter = ((radius * sin(self.sectorAngle)) * radius)/(radius + radius + lineLegth)
+           
+     //      #8
+           //Center alignment of image.180,120 and 90 degrees positions are adjusted manually
+                
+           let xPosition : CGFloat = self.sectorAngle == Degree(180).toRadians() ? (-size/2) : self.sectorAngle == Degree(120).toRadians() ? (radius/2.7 - size/2) : self.sectorAngle == Degree(90).toRadians() ? (radius/2.4 - size/2) : ((xIncenter - size/2) + height)
+                
+           let yPosition : CGFloat = self.sectorAngle == Degree(180).toRadians() ? size/1.6 : self.sectorAngle == Degree(120).toRadians() ? (radius/2 - size/2) : self.sectorAngle == Degree(90).toRadians() ? (radius/2.4 - size/2) : (yIncenter - size/2)
+         
+        
        //Drawing the slice
             
        UIGraphicsPushContext(ctx)
@@ -65,8 +109,20 @@ class FortuneWheelSlice : CALayer
        self.slice.borderColour.setStroke()
        path.stroke()
        UIGraphicsPopContext()
+      
+      //  #9
+        //Image draw
         
+        ctx.saveGState()
+        ctx.translateBy(x: center.x, y: center.y)
+        ctx.rotate(by: self.startAngle)
+        image.draw(in: CGRect.init(x: xPosition, y: yPosition , width: size, height: size))
+        ctx.restoreGState()
+        UIGraphicsPopContext()
         
     }
+
+    
     
 }
+

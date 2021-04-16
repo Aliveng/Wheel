@@ -8,6 +8,46 @@
 import Foundation
 import UIKit
 
+typealias Radians = CGFloat
+typealias Degree = CGFloat
+
+extension Degree
+{
+    func toRadians() -> Radians {
+        return (self * .pi) / 180.0
+    }
+}
+
+extension UIImage
+{
+    func rotateImage(angle:Radians) -> UIImage? {
+        let ciImage = CIImage(image: self)
+
+        let filter = CIFilter(name: "CIAffineTransform")
+        filter?.setValue(ciImage, forKey: kCIInputImageKey)
+        filter?.setDefaults()
+
+        let newAngle = angle * CGFloat(1)
+
+        var transform = CATransform3DIdentity
+
+        transform = CATransform3DRotate(transform, CGFloat(newAngle), 0, 0, 1)
+
+        let affineTransform = CATransform3DGetAffineTransform(transform)
+
+        filter?.setValue(NSValue(cgAffineTransform: affineTransform), forKey: "inputTransform")
+
+        let contex = CIContext(options: [CIContextOption.useSoftwareRenderer:true])
+
+        let outputImage = filter?.outputImage
+        let cgImage = contex.createCGImage(outputImage!, from: (outputImage?.extent)!)
+
+        let result = UIImage(cgImage: cgImage!)
+        return result
+    }
+
+}
+
 class FortuneWheel : UIView {
 
     /**Size of the imageView which indcates which slice has been selected*/
@@ -24,9 +64,7 @@ class FortuneWheel : UIView {
 
     /**Button which starts the spin game.This is places at the center of wheel.*/
     var playButton : UIButton = UIButton.init(type: .custom)
-
     
-    typealias Radians = CGFloat
     /**Angle each slice occupies.*/
     private var sectorAngle : Radians = 0
 
@@ -156,6 +194,5 @@ class FortuneWheel : UIView {
            self.performFinish(error: error)
        }
     }
-
 
 }
