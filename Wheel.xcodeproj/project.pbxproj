@@ -13,7 +13,11 @@
 		0F71AD1E2629A56900F02B4D /* WheelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71AD1D2629A56900F02B4D /* WheelTests.swift */; };
 		0F71AD292629A56900F02B4D /* WheelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71AD282629A56900F02B4D /* WheelUITests.swift */; };
 		0F9C6DD22629B520009CA938 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0F9C6DD12629B520009CA938 /* SnapKit */; };
-		0F9C6DE72629BDE9009CA938 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C6DE62629BDE9009CA938 /* ViewController.swift */; };
+		0F9C6DE72629BDE9009CA938 /* FortuneWheelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C6DE62629BDE9009CA938 /* FortuneWheelViewController.swift */; };
+		0F9C6DF52629C140009CA938 /* Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C6DF42629C140009CA938 /* Slice.swift */; };
+		0F9C6DFA2629C585009CA938 /* FortuneWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C6DF92629C585009CA938 /* FortuneWheel.swift */; };
+		0F9C6E002629D0BD009CA938 /* FortuneWheelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C6DFF2629D0BD009CA938 /* FortuneWheelError.swift */; };
+		0F9C6E052629D11A009CA938 /* FortuneWheelSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C6E042629D11A009CA938 /* FortuneWheelSlice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +49,11 @@
 		0F71AD242629A56900F02B4D /* WheelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WheelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F71AD282629A56900F02B4D /* WheelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelUITests.swift; sourceTree = "<group>"; };
 		0F71AD2A2629A56900F02B4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0F9C6DE62629BDE9009CA938 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0F9C6DE62629BDE9009CA938 /* FortuneWheelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortuneWheelViewController.swift; sourceTree = "<group>"; };
+		0F9C6DF42629C140009CA938 /* Slice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slice.swift; sourceTree = "<group>"; };
+		0F9C6DF92629C585009CA938 /* FortuneWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortuneWheel.swift; sourceTree = "<group>"; };
+		0F9C6DFF2629D0BD009CA938 /* FortuneWheelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortuneWheelError.swift; sourceTree = "<group>"; };
+		0F9C6E042629D11A009CA938 /* FortuneWheelSlice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortuneWheelSlice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +107,11 @@
 			isa = PBXGroup;
 			children = (
 				0F71AD062629A56800F02B4D /* AppDelegate.swift */,
-				0F9C6DE62629BDE9009CA938 /* ViewController.swift */,
+				0F9C6DE62629BDE9009CA938 /* FortuneWheelViewController.swift */,
+				0F9C6DF92629C585009CA938 /* FortuneWheel.swift */,
+				0F9C6E042629D11A009CA938 /* FortuneWheelSlice.swift */,
+				0F9C6DFF2629D0BD009CA938 /* FortuneWheelError.swift */,
+				0F9C6DF42629C140009CA938 /* Slice.swift */,
 				0F71AD0F2629A56900F02B4D /* Assets.xcassets */,
 				0F71AD112629A56900F02B4D /* LaunchScreen.storyboard */,
 				0F71AD142629A56900F02B4D /* Info.plist */,
@@ -267,7 +279,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F9C6DE72629BDE9009CA938 /* ViewController.swift in Sources */,
+				0F9C6E052629D11A009CA938 /* FortuneWheelSlice.swift in Sources */,
+				0F9C6DE72629BDE9009CA938 /* FortuneWheelViewController.swift in Sources */,
+				0F9C6DFA2629C585009CA938 /* FortuneWheel.swift in Sources */,
+				0F9C6DF52629C140009CA938 /* Slice.swift in Sources */,
+				0F9C6E002629D0BD009CA938 /* FortuneWheelError.swift in Sources */,
 				0F71AD072629A56800F02B4D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
