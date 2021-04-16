@@ -13,6 +13,7 @@
 		0F71AD132629A56900F02B4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F71AD112629A56900F02B4D /* LaunchScreen.storyboard */; };
 		0F71AD1E2629A56900F02B4D /* WheelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71AD1D2629A56900F02B4D /* WheelTests.swift */; };
 		0F71AD292629A56900F02B4D /* WheelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F71AD282629A56900F02B4D /* WheelUITests.swift */; };
+		0F9C6DC92629ADCB009CA938 /* SwiftFortuneWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9C6DC82629ADCB009CA938 /* SwiftFortuneWheel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		0F71AD242629A56900F02B4D /* WheelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WheelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F71AD282629A56900F02B4D /* WheelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelUITests.swift; sourceTree = "<group>"; };
 		0F71AD2A2629A56900F02B4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F9C6DC82629ADCB009CA938 /* SwiftFortuneWheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftFortuneWheel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			children = (
 				0F71AD062629A56800F02B4D /* AppDelegate.swift */,
 				0F71AD0A2629A56800F02B4D /* ViewController.swift */,
+				0F9C6DC82629ADCB009CA938 /* SwiftFortuneWheel.swift */,
 				0F71AD0F2629A56900F02B4D /* Assets.xcassets */,
 				0F71AD112629A56900F02B4D /* LaunchScreen.storyboard */,
 				0F71AD142629A56900F02B4D /* Info.plist */,
@@ -252,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F71AD0B2629A56800F02B4D /* ViewController.swift in Sources */,
+				0F9C6DC92629ADCB009CA938 /* SwiftFortuneWheel.swift in Sources */,
 				0F71AD072629A56800F02B4D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
