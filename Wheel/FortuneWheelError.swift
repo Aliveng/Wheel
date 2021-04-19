@@ -5,9 +5,9 @@
 //  Created by Татьяна Севостьянова on 16.04.2021.
 //
 
-
 import Foundation
 import UIKit
+
 
 class FortuneWheelError: Error {
     
@@ -17,5 +17,4 @@ class FortuneWheelError: Error {
         self.message = message
         self.code = code
     }
-    
 }
