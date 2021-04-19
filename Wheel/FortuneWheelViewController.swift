@@ -8,6 +8,36 @@
 import UIKit
 
 
+extension FortuneWheelViewController : FortuneWheelDelegate
+{
+    func shouldSelectObject() -> Int? {
+        return 1
+    }
+    
+    //If you want to get notified when the selection is complete the implement this function also
+    func finishedSelecting(index: Int?, error: FortuneWheelError?) {
+        
+    }
+    
+}
+
+//Some additional methods which creates random color.
+extension CGFloat {
+    static func random() -> CGFloat {
+        return CGFloat(arc4random()) / CGFloat(UInt32.max)
+    }
+}
+
+extension UIColor {
+    static func random() -> UIColor {
+        return UIColor(red:   .random(),
+                       green: .random(),
+                       blue:  .random(),
+                       alpha: 1.0)
+    }
+}
+
+
 class FortuneWheelViewController: UIViewController {
     
     override func viewDidLoad() {
@@ -18,6 +48,7 @@ class FortuneWheelViewController: UIViewController {
             self.ShowFortuneWheel()
         
         }
+    
         
         //Assign the center CGPoint for the wheel and a diameter adn the slices it should show and conform to the protocol
         func ShowFortuneWheel()
@@ -31,24 +62,10 @@ class FortuneWheelViewController: UIViewController {
                 slices.append(slice)
             }
             let fortuineWheel = FortuneWheel.init(center: CGPoint.init(x: self.view.frame.width/2, y: self.view.frame.height/2), diameter: 300, slices: slices)
+            fortuineWheel.delegate = self
             self.view.addSubview(fortuineWheel)
         }
 
 
     }
 
-    //Some additional methods which creates random color.
-    extension CGFloat {
-        static func random() -> CGFloat {
-            return CGFloat(arc4random()) / CGFloat(UInt32.max)
-        }
-    }
-
-    extension UIColor {
-        static func random() -> UIColor {
-            return UIColor(red:   .random(),
-                           green: .random(),
-                           blue:  .random(),
-                           alpha: 1.0)
-        }
-}
