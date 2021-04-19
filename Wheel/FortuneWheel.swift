@@ -8,6 +8,19 @@
 import Foundation
 import UIKit
 
+protocol FortuneWheelDelegate : NSObject
+{
+    
+    /*returns the index which should be selected when the user taps the spin button to start the game.
+    Default value is -1*/
+    /**Index which should be selected for array slices*/
+    func shouldSelectObject() -> Int?
+    
+    /**Indicates the finished of the game.*/
+    func finishedSelecting(index : Int? , error : FortuneWheelError?)
+    
+}
+
 typealias Radians = CGFloat
 typealias Degree = CGFloat
 
@@ -48,7 +61,155 @@ extension UIImage
 
 }
 
+extension FortuneWheel : CAAnimationDelegate
+{
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        
+        if flag
+        {
+            self.performFinish(error: nil)
+        }
+        else
+        {
+            let error = FortuneWheelError.init(message: "Error perforing selection", code: 0)
+            self.performFinish(error: error)
+        }
+        
+    }
+
+}
+
+//Makes the delegate optional
+extension FortuneWheelDelegate
+{
+    func finishedSelecting(index : Int? , error : FortuneWheelError?)
+    {
+        
+    }
+    
+}
+
 class FortuneWheel : UIView {
+    
+    weak var delegate : FortuneWheelDelegate?
+
+    //Index which should be selected when the play button is tapped
+    var selectionIndex : Int = -1
+    
+    //This variable stores the selection angle calculated in the perform selection method.which will be used to transform the Wheel view when animation completes
+    private var selectionAngle : Radians = 0
+
+    func performSelection()
+    {
+        var selectionSpinDuration : Double = 1
+        
+    //    #1
+        self.selectionAngle = Degree(360).toRadians() - (self.sectorAngle * CGFloat(self.selectionIndex))
+        let borderOffset = self.sectorAngle * 0.1
+        self.selectionAngle -= Radians.random(in: borderOffset...(self.sectorAngle - borderOffset))
+        
+        //if selection angle is negative its changed to positive. negative value spins wheel in reverse direction
+        if self.selectionAngle < 0
+        {
+           self.selectionAngle = Degree(360).toRadians() + self.selectionAngle
+           selectionSpinDuration += 0.5
+        }
+            
+        var delay : Double = 0
+        
+        //Rotates view Fast which simulates spin of the wheel
+        let fastSpin = CABasicAnimation.init(keyPath: "transform.rotation")
+        fastSpin.fromValue = NSNumber.init(floatLiteral: 0)
+        fastSpin.toValue = NSNumber.init(floatLiteral: .pi * 2)
+        fastSpin.duration = 0.7
+        fastSpin.repeatCount = 3
+        fastSpin.beginTime = CACurrentMediaTime() + delay
+        delay += Double(fastSpin.duration) * Double(fastSpin.repeatCount)
+        
+        //Slows down the spin a bit to indicate stopping.starts immediately after fast spin is completed.
+        let slowSpin = CABasicAnimation.init(keyPath: "transform.rotation")
+        slowSpin.fromValue = NSNumber.init(floatLiteral: 0)
+        slowSpin.toValue = NSNumber.init(floatLiteral: .pi * 2)
+        slowSpin.isCumulative = true
+        slowSpin.beginTime = CACurrentMediaTime() + delay
+        slowSpin.repeatCount = 1
+        slowSpin.duration = 1.5
+        delay += Double(slowSpin.duration) * Double(slowSpin.repeatCount)
+            
+        //Rotates wheel to the slice which should be selected.Starts immediately after slow spin.
+        let selectionSpin = CABasicAnimation.init(keyPath: "transform.rotation")
+        selectionSpin.delegate = self
+        selectionSpin.fromValue = NSNumber.init(floatLiteral: 0)
+        selectionSpin.toValue = NSNumber.init(floatLiteral: Double(self.selectionAngle))
+        selectionSpin.duration = selectionSpinDuration
+        selectionSpin.beginTime = CACurrentMediaTime() + delay
+        selectionSpin.isCumulative = true
+        selectionSpin.repeatCount = 1
+        selectionSpin.isRemovedOnCompletion = false
+        selectionSpin.fillMode = .forwards
+        
+        //Animation is added to layer.
+        self.wheelView.layer.add(fastSpin, forKey: "fastAnimation")
+        self.wheelView.layer.add(slowSpin, forKey: "SlowAnimation")
+        self.wheelView.layer.add(selectionSpin, forKey: "SelectionAnimation")
+            
+    }
+
+    @objc private func startAction(sender : UIButton)
+    {
+       
+       self.playButton.isEnabled = false
+       
+       if let slicesCount = self.slices?.count
+       {
+          //askes the delegate for index which should be selected. if returned assigned to selectedIndex variable
+          if let index = self.delegate?.shouldSelectObject()
+          {
+             self.selectionIndex = index
+          }
+          
+          //checks if selectionIndex variable is in slices array bounds.
+          if (self.selectionIndex >= 0 && self.selectionIndex < slicesCount )
+          {
+           // #1
+            self.performSelection()
+          }
+          else
+          {
+            let error = FortuneWheelError.init(message: "Invalid selection index", code: 0)
+            self.performFinish(error: error)
+          }
+                
+        }
+        else
+        {
+            let error = FortuneWheelError.init(message: "No Slices", code: 0)
+            self.performFinish(error: error)
+        }
+    }
+
+    /*Function which notifies the finish of selection or any errors encountered through delegate.
+     For now leave it empty will get to it in a moment*/
+    private func performFinish(error : FortuneWheelError? )
+    {
+            
+           if let error = error
+           {
+              self.delegate?.finishedSelecting(index: nil, error: error)
+           }
+           else
+           {
+              //When the animation is complete transform fixes the view position to selection angle.
+              self.wheelView.transform = CGAffineTransform.init(rotationAngle:self.selectionAngle)
+              self.delegate?.finishedSelecting(index: self.selectionIndex, error: nil)
+           }
+           
+           if !self.playButton.isEnabled
+           {
+              self.playButton.isEnabled = true
+           }
+                
+    }
 
     /**Size of the imageView which indcates which slice has been selected*/
     private lazy var indicatorSize : CGSize = {
@@ -150,13 +311,13 @@ class FortuneWheel : UIView {
        self.addSubview(self.playButton)
     }
     
-    @objc func startAction(sender: UIButton){
+//    @objc func startAction(sender: UIButton){
+//
+//    }
 
-    }
-
-    func performFinish(error : FortuneWheelError?){
-
-    }
+//    func performFinish(error : FortuneWheelError?){
+//
+//    }
     
     private func addWheelLayer()
     {
