@@ -17,7 +17,6 @@ class FortuneWheelViewController: UIViewController {
         self.showFortuneWheel()
         
     }
-    
     //Назначает центральную точку CGPoint для колеса и диаметр сегментов, которые должны быть  показаны
     func showFortuneWheel() {
         var slices = [Slice]()
