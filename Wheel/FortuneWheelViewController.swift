@@ -17,7 +17,7 @@ class FortuneWheelViewController: UIViewController {
         self.showFortuneWheel()
         
     }
-    //Назначает центральную точку CGPoint для колеса и диаметр сегментов, которые должны быть  показаны
+    //Назначает центральную точку CGPoint колеса и диаметр сегментов
     func showFortuneWheel() {
         var slices = [Slice]()
         for i in 1...10 {
@@ -32,5 +32,15 @@ class FortuneWheelViewController: UIViewController {
                                                             diameter: 400, slices: slices)
         fortuineWheel.delegate = self
         self.view.addSubview(fortuineWheel)
+    }
+}
+
+extension FortuneWheelViewController : FortuneWheelDelegate {
+    // Сектор котрый получаем при отработке
+    func shouldSelectObject() -> Int? {
+        return 1
+    }
+    // Получить уведомление о завершении выбора
+    func finishedSelecting(index: Int?, error: FortuneWheelError?) {
     }
 }

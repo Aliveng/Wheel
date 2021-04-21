@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-protocol FortuneWheelDelegate : NSObject {
+protocol FortuneWheelDelegate: NSObject {
     
     func shouldSelectObject() -> Int?  // Возвращает индекс сектора, который должен быть выбран. Значение по умолчанию - 1
-    func finishedSelecting(index : Int? , error : FortuneWheelError?) // Указывает на окончание
+    func finishedSelecting(index: Int? , error: FortuneWheelError?) // Указывает на окончание
     
 }
 

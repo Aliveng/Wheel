@@ -9,35 +9,73 @@ import Foundation
 import UIKit
 
 
-class FortuneWheel : UIView {
+class FortuneWheel: UIView {
     
-    weak var delegate : FortuneWheelDelegate?
+    weak var delegate: FortuneWheelDelegate?
     
-    //Index which should be selected when the play button is tapped
-    var selectionIndex : Int = -1
+    // View - Колесо на котором будут нарисованы сектора
+    private var wheelView: UIView!
     
-    //This variable stores the selection angle calculated in the perform selection method.which will be used to transform the Wheel view when animation completes
-    private var selectionAngle : Radians = 0
+    // Угол, который занимает каждый сектор
+    private var sectorAngle: Radians = 0
     
-    func performSelection()
-    {
-        var selectionSpinDuration : Double = 1
+    // Кнопка, запускающая колесо. Расположена в его центре
+    var playButton: UIButton = UIButton.init(type: .custom)
+    
+    // ImageView стрелки-индикатора
+    private var indicator = UIImageView.init()
+    
+    // Размер стрелки-индикатора
+    private lazy var indicatorSize: CGSize = {
+        let size = CGSize.init(width: self.bounds.width * 0.126 ,
+                               height: self.bounds.height * 0.126)
+        return size }()
+    
+    // Количество секторов в колесе, определяется массивом объектов, где каждый содержит данные секторов
+    private var slices: [Slice]?
+    
+    //Инициализируем колесо с центром в CGPoint, диаметром и секторами
+    init(center: CGPoint, diameter: CGFloat, slices: [Slice]) {
+        super.init(frame: CGRect.init(origin: CGPoint.init(x: center.x - diameter/2,
+                                                           y: center.y - diameter/2),
+                                                        size: CGSize.init(width: diameter,
+                                                                          height: diameter)))
+        self.slices = slices
+        self.initialSetUp()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var selectionIndex : Int = -1 // Индекс, который должен быть выбран при нажатии кнопки
+    private var selectionAngle : Radians = 0 // Угол выбора, вычисленный в методе выполнения выбора, который будет использоваться для преобразования вида колеса после завершения анимации
+    
+    // Сборка элементов колеса
+    private func initialSetUp() {
         
-        //    #1
+        self.backgroundColor = .clear
+        self.addWheelView()
+        self.addStartButton()
+        self.addIndicator()
+    }
+    
+    func performSelection() { // Выполнение вращения - выбора сектора
+        var selectionSpinDuration: Double = 1 // задержка последней анимации выбора, до заданого сектора
+        
         self.selectionAngle = Degree(360).toRadians() - (self.sectorAngle * CGFloat(self.selectionIndex))
         let borderOffset = self.sectorAngle * 0.1
         self.selectionAngle -= Radians.random(in: borderOffset...(self.sectorAngle - borderOffset))
         
-        //if selection angle is negative its changed to positive. negative value spins wheel in reverse direction
-        if self.selectionAngle < 0
-        {
+        // Если выбраный угол отрицательный, то он изменяется на положительный. Отрицательное значение вращает колесо в обратном направлении
+        if self.selectionAngle < 0 {
             self.selectionAngle = Degree(360).toRadians() + self.selectionAngle
             selectionSpinDuration += 0.5
         }
         
-        var delay : Double = 0
+        var delay : Double = 0 // Задержка начала вращения после нажатия кнопки
         
-        //Rotates view Fast which simulates spin of the wheel
+        // Быстрое вращение колеса
         let fastSpin = CABasicAnimation.init(keyPath: "transform.rotation")
         fastSpin.fromValue = NSNumber.init(floatLiteral: 0)
         fastSpin.toValue = NSNumber.init(floatLiteral: .pi * 2)
@@ -46,7 +84,7 @@ class FortuneWheel : UIView {
         fastSpin.beginTime = CACurrentMediaTime() + delay
         delay += Double(fastSpin.duration) * Double(fastSpin.repeatCount)
         
-        //Slows down the spin a bit to indicate stopping.starts immediately after fast spin is completed.
+        // Немного замедляет вращение, начинается сразу после завершения быстрого вращения
         let slowSpin = CABasicAnimation.init(keyPath: "transform.rotation")
         slowSpin.fromValue = NSNumber.init(floatLiteral: 0)
         slowSpin.toValue = NSNumber.init(floatLiteral: .pi * 2)
@@ -56,7 +94,7 @@ class FortuneWheel : UIView {
         slowSpin.duration = 1.5
         delay += Double(slowSpin.duration) * Double(slowSpin.repeatCount)
         
-        //Rotates wheel to the slice which should be selected.Starts immediately after slow spin.
+        // Вращение колеса к сектору, который должен быть выбран. Начинается сразу после медленного вращения
         let selectionSpin = CABasicAnimation.init(keyPath: "transform.rotation")
         selectionSpin.delegate = self
         selectionSpin.fromValue = NSNumber.init(floatLiteral: 0)
@@ -68,202 +106,122 @@ class FortuneWheel : UIView {
         selectionSpin.isRemovedOnCompletion = false
         selectionSpin.fillMode = .forwards
         
-        //Animation is added to layer.
+        // Анимации добавляются к колесу
         self.wheelView.layer.add(fastSpin, forKey: "fastAnimation")
         self.wheelView.layer.add(slowSpin, forKey: "SlowAnimation")
         self.wheelView.layer.add(selectionSpin, forKey: "SelectionAnimation")
-        
     }
     
-    @objc private func startAction(sender : UIButton)
-    {
-        
+    // Уведомление о завершении выбора или любых ошибках, возникших через делегат
+    private func performFinish(error : FortuneWheelError? ) {
+        if let error = error {
+            self.delegate?.finishedSelecting(index: nil, error: error)
+        }
+        else {
+            //Когда анимация завершена, трансформацией фиксируется положение колеса на заданый угол
+            self.wheelView.transform = CGAffineTransform.init(rotationAngle:self.selectionAngle)
+            self.delegate?.finishedSelecting(index: self.selectionIndex, error: nil)
+        }
+        if !self.playButton.isEnabled {
+            self.playButton.isEnabled = true
+        }
+    }
+    
+    // Добавляет View колеса с секторами
+    private func addWheelView() {
+        let width = self.bounds.width - self.indicatorSize.width
+        let height = self.bounds.height - self.indicatorSize.height
+        // Выровневоние колеса с секторами по центру колеса подложки
+        let xPosition : CGFloat = (self.bounds.width/2) - (width/2)
+        let yPosition : CGFloat = (self.bounds.height/2) - (height/2)
+        self.wheelView = UIView.init(frame: CGRect.init(x: xPosition,
+                                                        y: yPosition,
+                                                        width: width,
+                                                        height: height))
+        self.wheelView.backgroundColor = .black
+        self.wheelView.layer.cornerRadius = width/2
+        self.wheelView.clipsToBounds = true
+        self.addSubview(self.wheelView)
+        // Отрисовка секторов
+        self.addWheelLayer()
+    }
+    
+    // Добавляет стрелку-индикатор
+    private func addIndicator() {
+        //Положение индикатора (половина перекрывала колесо, а остальная часть выходила за пределы, и расположение в центре правой стороны колеса, то есть под углом 0 градусов)
+        let position = CGPoint.init(x: self.frame.width - self.indicatorSize.width,
+                                    y: self.bounds.height/2 - self.indicatorSize.height/2)
+        self.indicator.frame = CGRect.init(origin: position,
+                                           size: self.indicatorSize)
+        self.indicator.image = UIImage.init(named: "pointer")
+        if self.indicator.superview == nil {
+            self.addSubview(self.indicator)
+        }
+    }
+    
+    // Добавляет кнопку Play
+    private func addStartButton() {
+        let size = CGSize.init(width: self.bounds.width * 0.20,
+                               height: self.bounds.height * 0.20)
+        let point = CGPoint.init(x: self.frame.width/2 - size.width/2,
+                                 y: self.frame.height/2 - size.height/2)
+        self.playButton.setTitle("Start!", for: .normal)
+        playButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+        self.playButton.frame = CGRect.init(origin: point,
+                                            size: size)
+        self.playButton.addTarget(self, action: #selector(startAction(sender:)), for: .touchUpInside)
+        self.playButton.layer.cornerRadius = self.playButton.frame.height/2
+        self.playButton.clipsToBounds = true
+        self.playButton.backgroundColor = .white
+        self.playButton.layer.borderWidth = 0.5
+        self.playButton.layer.borderColor = UIColor.black.cgColor
+        self.addSubview(self.playButton)
+    }
+    
+    @objc private func startAction(sender: UIButton) {
         self.playButton.isEnabled = false
-        
-        if let slicesCount = self.slices?.count
-        {
-            //askes the delegate for index which should be selected. if returned assigned to selectedIndex variable
-            if let index = self.delegate?.shouldSelectObject()
-            {
+        if let slicesCount = self.slices?.count {
+            // Запрашивает делегат для индекса, который должен быть выбран. Если SelectedIndex присвоено значение
+            if let index = self.delegate?.shouldSelectObject() {
                 self.selectionIndex = index
             }
-            
-            //checks if selectionIndex variable is in slices array bounds.
-            if (self.selectionIndex >= 0 && self.selectionIndex < slicesCount )
-            {
-                // #1
-                self.performSelection()
+            // Проверка, находится ли selectionIndex в границах массива slices
+            if (self.selectionIndex >= 0 && self.selectionIndex < slicesCount ) {
+                self.performSelection() // выполняем Выбор
             }
-            else
-            {
+            else {
                 let error = FortuneWheelError.init(message: "Invalid selection index", code: 0)
                 self.performFinish(error: error)
             }
-            
         }
-        else
-        {
+        else {
             let error = FortuneWheelError.init(message: "No Slices", code: 0)
             self.performFinish(error: error)
         }
     }
     
-    /*Function which notifies the finish of selection or any errors encountered through delegate.
-     For now leave it empty will get to it in a moment*/
-    private func performFinish(error : FortuneWheelError? )
-    {
-        
-        if let error = error
-        {
-            self.delegate?.finishedSelecting(index: nil, error: error)
-        }
-        else
-        {
-            //When the animation is complete transform fixes the view position to selection angle.
-            self.wheelView.transform = CGAffineTransform.init(rotationAngle:self.selectionAngle)
-            self.delegate?.finishedSelecting(index: self.selectionIndex, error: nil)
-        }
-        
-        if !self.playButton.isEnabled
-        {
-            self.playButton.isEnabled = true
-        }
-        
-    }
-    
-    /**Size of the imageView which indcates which slice has been selected*/
-    private lazy var indicatorSize : CGSize = {
-        let size = CGSize.init(width: self.bounds.width * 0.126 , height: self.bounds.height * 0.126)
-        return size }()
-    
-    /**The number slices the wheel has to be divided into is determined by this array count and
-     each slice object contains its corresponding slices Data.*/
-    private var slices : [Slice]?
-    
-    /**ImageView that holds an image which indicates which slice has been selected.*/
-    private var indicator = UIImageView.init()
-    
-    /**Button which starts the spin game.This is places at the center of wheel.*/
-    var playButton : UIButton = UIButton.init(type: .custom)
-    
-    /**Angle each slice occupies.*/
-    private var sectorAngle : Radians = 0
-    
-    /**The view on which the slices will be drawn.This view will be roatated to simuate the spin.*/
-    private var wheelView : UIView!
-    
-    /**Creates and returns an FortuneWheel with its center aligned to center CGPoint , diameter and slices drawn*/
-    init(center: CGPoint, diameter : CGFloat , slices : [Slice])
-    {
-        super.init(frame: CGRect.init(origin: CGPoint.init(x: center.x - diameter/2, y: center.y - diameter/2), size: CGSize.init(width: diameter, height: diameter)))
-        self.slices = slices
-        self.initialSetUp()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
-    /**The setup of the fortune wheel is done here.*/
-    private func initialSetUp() {
-        
-        self.backgroundColor = .clear
-        self.addWheelView()
-        self.addStartBttn()
-        self.addIndicator()
-    }
-    
-    /**Adds the wheel view which has the slices.*/
-    private func addWheelView()
-    {
-        
-        let width = self.bounds.width - self.indicatorSize.width
-        let height = self.bounds.height - self.indicatorSize.height
-        
-        /**Calculating x,y positions such that wheel view is aligned with FortuneWheel at the center*/
-        let xPosition : CGFloat = (self.bounds.width/2) - (width/2)
-        let yPosition : CGFloat = (self.bounds.height/2) - (height/2)
-        
-        self.wheelView = UIView.init(frame: CGRect.init(x: xPosition, y: yPosition, width: width, height: height))
-        self.wheelView.backgroundColor = .gray
-        self.wheelView.layer.cornerRadius = width/2
-        self.wheelView.clipsToBounds = true
-        self.addSubview(self.wheelView)
-        
-        
-        //This functions will draw the slices.We will get to this later.
-        self.addWheelLayer()
-    }
-    
-    
-    /**Adds selection Indicators*/
-    private func addIndicator()
-    {
-        /**Calculating the position of the indicator such that half overlaps with the view and the rest if outsice of the view and
-         locating indicator at the right side center of the wheel. i.e., at 0 degrees.*/
-        let position = CGPoint.init(x: self.frame.width - self.indicatorSize.width, y: self.bounds.height/2 - self.indicatorSize.height/2)
-        
-        self.indicator.frame = CGRect.init(origin: position, size: self.indicatorSize)
-        self.indicator.image = UIImage.init(named: "pointer")
-        if self.indicator.superview == nil
-        {
-            self.addSubview(self.indicator)
-        }
-        
-    }
-    
-    /**Adds spin or start game button to the view*/
-    private func addStartBttn()
-    {
-        let size = CGSize.init(width: self.bounds.width * 0.15, height: self.bounds.height * 0.15)
-        let point = CGPoint.init(x:  self.frame.width/2 - size.width/2, y: self.frame.height/2 - size.height/2)
-        self.playButton.setTitle("Play", for: .normal)
-        self.playButton.frame = CGRect.init(origin: point, size: size)
-        
-        //WE will add the StartAction method later on
-        self.playButton.addTarget(self, action: #selector(startAction(sender:)), for: .touchUpInside)
-        self.playButton.layer.cornerRadius = self.playButton.frame.height/2
-        self.playButton.clipsToBounds = true
-        self.playButton.backgroundColor = .gray
-        self.playButton.layer.borderWidth = 0.5
-        self.playButton.layer.borderColor = UIColor.white.cgColor
-        self.addSubview(self.playButton)
-    }
-    
-    private func addWheelLayer()
-    {
-        //We check if the slices array exists or not.if not we show an error.
-        if let slices = self.slices
-        {
-            //We check if there are atleast 2 slices in the array.if not we show an error.
-            if slices.count >= 2
-            {
+    private func addWheelLayer() {
+        //Проверка, существует ли массив секторов, если нет, то ошибка
+        if let slices = self.slices {
+            // Проверка, есть ли в массиве хотя бы 2 сектора, если нет - ошибка
+            if slices.count >= 2 {
                 self.wheelView.layer.sublayers?.forEach({$0.removeFromSuperlayer()})
-                
-                //#1
                 self.sectorAngle = (2 * CGFloat.pi)/CGFloat(slices.count)
-                
-                // #2
-                for (index,slice) in slices.enumerated()
-                {
-                    //we will get to this class in a moment for now ignore the errors
-                    let sector = FortuneWheelSlice.init(frame: self.wheelView.bounds, startAngle: self.sectorAngle * CGFloat(index), sectorAngle: self.sectorAngle, slice: slice)
+                for (index,slice) in slices.enumerated() {
+                    let sector = FortuneWheelSlice.init(frame: self.wheelView.bounds,
+                                                        startAngle: self.sectorAngle * CGFloat(index),
+                                                        sectorAngle: self.sectorAngle, slice: slice)
                     self.wheelView.layer.addSublayer(sector)
                     sector.setNeedsDisplay()
                 }
             }
-            else
-            {
+            else {
                 let error = FortuneWheelError.init(message: "not enough slices. Should have atleast two slices", code: 0)
-                // #3
                 self.performFinish(error: error)
             }
         }
-        else
-        {
+        else {
             let error = FortuneWheelError.init(message: "no Slices", code: 0)
-            //  #3
             self.performFinish(error: error)
         }
     }
@@ -271,7 +229,6 @@ class FortuneWheel : UIView {
 
 extension FortuneWheel : CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        
         if flag {
             self.performFinish(error: nil)
         }

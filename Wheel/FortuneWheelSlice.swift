@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 
-class FortuneWheelSlice : CALayer {
+class FortuneWheelSlice: CALayer {
     
-    private var startAngle : Radians! // Угол начала сектора
-    private var sectorAngle : Radians = -1 // Общий угол, который охватывает сектор
-    private var slice : Slice! // Объект-сектор, содержащий данные сектора
+    private var startAngle: Radians! // Угол начала сектора
+    private var sectorAngle: Radians = -1 // Общий угол, который охватывает сектор
+    private var slice: Slice! // Объект-сектор, содержащий данные сектора
     
-    init(frame : CGRect , startAngle : Radians , sectorAngle : Radians , slice : Slice) {
+    init(frame: CGRect, startAngle: Radians, sectorAngle: Radians, slice: Slice) {
         super.init()
         self.startAngle = startAngle // Это угол, под которым начинается сектор
         self.sectorAngle = sectorAngle // Это угол, который охватывает сектор
@@ -34,7 +34,8 @@ class FortuneWheelSlice : CALayer {
     override func draw(in context: CGContext) {
         
         let radius = self.frame.width/2 - self.slice.borderWidth // Радиус колеса
-        let center = CGPoint.init(x: self.frame.width/2, y: self.frame.height/2) // Расположение центра колеса
+        let center = CGPoint.init(x: self.frame.width/2,
+                                  y: self.frame.height/2) // Расположение центра колеса
         let image = self.slice.image.rotateImage(angle: self.startAngle)! // !!! Поворот изображения
         let lineLegth = CGFloat((2 * radius * sin(self.sectorAngle/2))) // Длина третьей линии в равнобедренном треугольнике - секторе. Расчитана формулой длинны хорды
         let s = (radius + radius + lineLegth)/2 // Половина периметра - используется для расчета размера дуги сектора
@@ -58,14 +59,17 @@ class FortuneWheelSlice : CALayer {
         let xPosition : CGFloat = self.sectorAngle == Degree(180).toRadians() ? (-size/2) : self.sectorAngle == Degree(120).toRadians() ? (radius/2.7 - size/2) : self.sectorAngle == Degree(90).toRadians() ? (radius/2.4 - size/2) : ((xIncenter - size/2) + height)
         let yPosition : CGFloat = self.sectorAngle == Degree(180).toRadians() ? size/1.6 : self.sectorAngle == Degree(120).toRadians() ? (radius/2 - size/2) : self.sectorAngle == Degree(90).toRadians() ? (radius/2.4 - size/2) : (yIncenter - size/2)
         
-        
         // Отрисовка сектора
         UIGraphicsPushContext(context)
         
         let path = UIBezierPath.init()
         path.lineWidth = self.slice.borderWidth
         path.move(to: center)
-        path.addArc(withCenter: center, radius: radius, startAngle: self.startAngle, endAngle: self.startAngle + self.sectorAngle, clockwise: true)
+        path.addArc(withCenter: center,
+                    radius: radius,
+                    startAngle: self.startAngle,
+                    endAngle: self.startAngle + self.sectorAngle,
+                    clockwise: true)
         path.close()
         // Заполняет цветом сектор
         self.slice.color.setFill()

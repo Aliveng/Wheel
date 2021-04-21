@@ -18,17 +18,6 @@ extension Degree { // Градусы в Радианы
     }
 }
 
-extension FortuneWheelViewController : FortuneWheelDelegate {
-    // Сектор котрый получаем при отработке
-    func shouldSelectObject() -> Int? {
-        return 1
-    }
-    // Получить уведомление о завершении выбора
-    func finishedSelecting(index: Int?, error: FortuneWheelError?) {
-        
-    }
-}
-
 // Дополнительные методы, которые создают случайный цвет
 extension CGFloat {
     static func random() -> CGFloat {
