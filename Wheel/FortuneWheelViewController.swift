@@ -10,6 +10,9 @@ import UIKit
 
 class FortuneWheelViewController: UIViewController {
     
+   // var nameOfSlice: [String] = ["One", "Two"]
+ //   var newColors = UIColor.green
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,8 +25,9 @@ class FortuneWheelViewController: UIViewController {
         var slices = [Slice]()
         for i in 1...10 {
             //Здесь вызываются изображения, из assets с именами от 1 до 5
-            let slice = Slice.init(image: UIImage.init(named: "\(i <= 5 ? i : (i - 5))")!)
-            slice.color = .random()
+           // let slice = Slice.init(image: UIImage.init(named: "\(i <= 5 ? i : (i - 5))")!)
+            let slice = Slice.init(text: "NewSlice")
+            slice.color = (i % 2 == 0) ? UIColor.red : UIColor.green
             slices.append(slice)
         }
         
