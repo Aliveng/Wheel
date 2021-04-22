@@ -111,13 +111,11 @@
 			isa = PBXGroup;
 			children = (
 				0F71AD062629A56800F02B4D /* AppDelegate.swift */,
-				0F9C6DE62629BDE9009CA938 /* FortuneWheelViewController.swift */,
-				0F9C6DF92629C585009CA938 /* FortuneWheel.swift */,
 				0F9B007B262ECC5C004393CB /* FortuneWheelDelegate.swift */,
-				0F9C6E042629D11A009CA938 /* FortuneWheelSlice.swift */,
-				0F9C6DF42629C140009CA938 /* Slice.swift */,
-				0F9C6DFF2629D0BD009CA938 /* FortuneWheelError.swift */,
+				0F9C6DE62629BDE9009CA938 /* FortuneWheelViewController.swift */,
 				0F9B0070262DB3E4004393CB /* Extensions.swift */,
+				0F9B008426302F10004393CB /* FortuneWheel */,
+				0F9B008026302EC5004393CB /* Slice */,
 				0F71AD0F2629A56900F02B4D /* Assets.xcassets */,
 				0F71AD112629A56900F02B4D /* LaunchScreen.storyboard */,
 				0F71AD142629A56900F02B4D /* Info.plist */,
@@ -141,6 +139,24 @@
 				0F71AD2A2629A56900F02B4D /* Info.plist */,
 			);
 			path = WheelUITests;
+			sourceTree = "<group>";
+		};
+		0F9B008026302EC5004393CB /* Slice */ = {
+			isa = PBXGroup;
+			children = (
+				0F9C6E042629D11A009CA938 /* FortuneWheelSlice.swift */,
+				0F9C6DF42629C140009CA938 /* Slice.swift */,
+			);
+			path = Slice;
+			sourceTree = "<group>";
+		};
+		0F9B008426302F10004393CB /* FortuneWheel */ = {
+			isa = PBXGroup;
+			children = (
+				0F9C6DF92629C585009CA938 /* FortuneWheel.swift */,
+				0F9C6DFF2629D0BD009CA938 /* FortuneWheelError.swift */,
+			);
+			path = FortuneWheel;
 			sourceTree = "<group>";
 		};
 		0F9C6DDA2629B788009CA938 /* Frameworks */ = {

@@ -5,7 +5,6 @@
 //  Created by Татьяна Севостьянова on 19.04.2021.
 //
 
-import Foundation
 import UIKit
 
 
@@ -35,7 +34,7 @@ extension UIColor {
 }
 
 extension UIImage {
-    func rotateImage(angle:Radians) -> UIImage? {
+    func rotateImage(angle: Radians) -> UIImage? {
         let ciImage = CIImage(image: self)
         let filter = CIFilter(name: "CIAffineTransform")
             filter?.setValue(ciImage, forKey: kCIInputImageKey)

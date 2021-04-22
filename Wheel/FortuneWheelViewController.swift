@@ -35,9 +35,8 @@ class FortuneWheelViewController: UIViewController {
     }
 }
 
-extension FortuneWheelViewController : FortuneWheelDelegate {
-    // Сектор котрый получаем при отработке
-    func shouldSelectObject() -> Int? {
+extension FortuneWheelViewController: FortuneWheelDelegate {
+    func shouldSelectObject() -> Int? { // Сектор котрый получаем при отработке
         return 1
     }
     // Получить уведомление о завершении выбора
