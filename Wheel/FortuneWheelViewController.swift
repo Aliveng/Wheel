@@ -22,7 +22,7 @@ class FortuneWheelViewController: UIViewController {
         var slices = [Slice]()
         for i in 1...10 {
             
-            let slice = Slice.init(text: "NewSlice")
+            let slice = Slice.init(text: "NewSlice \(i)")
             slice.color = (i % 2 == 0) ? UIColor.red : UIColor.green
             slices.append(slice)
         }

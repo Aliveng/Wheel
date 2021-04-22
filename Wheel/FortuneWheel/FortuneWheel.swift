@@ -210,6 +210,11 @@ class FortuneWheel: UIView {
                     let sector = FortuneWheelSlice.init(frame: self.wheelView.bounds,
                                                         startAngle: self.sectorAngle * CGFloat(index),
                                                         sectorAngle: self.sectorAngle, slice: slice)
+                    sector.sliceIndex = CGFloat(index)
+                    var sectorTextLayer = CATextLayer()
+                    sectorTextLayer.frame = self.wheelView.bounds
+                    sectorTextLayer.string = slice.text
+                    sector.addSublayer(sectorTextLayer)
                     self.wheelView.layer.addSublayer(sector)
                     sector.setNeedsDisplay()
                 }

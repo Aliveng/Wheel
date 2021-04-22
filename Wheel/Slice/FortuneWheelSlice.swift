@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreGraphics
 
 
 class FortuneWheelSlice: CALayer {
@@ -13,6 +14,7 @@ class FortuneWheelSlice: CALayer {
     private var startAngle: Radians! // Угол начала сектора
     private var sectorAngle: Radians = -1 // Общий угол, который охватывает сектор
     private var slice: Slice! // Объект-сектор, содержащий данные сектора
+    var sliceIndex: CGFloat = 0
     
     init(frame: CGRect, startAngle: Radians, sectorAngle: Radians, slice: Slice) {
         super.init()
@@ -55,6 +57,9 @@ class FortuneWheelSlice: CALayer {
         // Заполняет цветом контур - обводку
         self.slice.borderColour.setStroke()
         path.stroke()
+        
+        (text as NSString).draw(at: CGPoint(x: self.position.x + (10 * sliceIndex), y: self.position.y + 0), withAttributes: [:])
+        
         UIGraphicsPopContext()
     }
 }
