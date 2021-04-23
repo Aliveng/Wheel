@@ -22,20 +22,13 @@ class Slice {
 //                  #colorLiteral(red: 0.5330474377, green: 0.2909428477, blue: 0.6148440838, alpha: 1),
 //                  #colorLiteral(red: 0.5619059801, green: 0.2522692084, blue: 0.4293728471, alpha: 1),
 //                  #colorLiteral(red: 0.2041620612, green: 0.3005031645, blue: 0.3878828585, alpha: 1)]
+    
     var color = UIColor.red
     var text: String
-    
-//    // Картинка которая будет показана в секторе
-//    var image: UIImage
-    // Цвет границы
     var borderColour = UIColor.white
     // Толщина границы
     var borderWidth: CGFloat = 2.5
-    
-//    init(image: UIImage) {
-//        self.image = image
-//    }
-    
+
     init(text: String) {
       //  self.color = color
         self.text = text

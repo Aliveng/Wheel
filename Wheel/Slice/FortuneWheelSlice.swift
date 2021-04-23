@@ -39,6 +39,29 @@ class FortuneWheelSlice: CALayer {
                                   y: self.frame.height/2) // Расположение центра колеса
         let text = self.slice.text
         
+        let layerInsets: UIEdgeInsets = UIEdgeInsets(top: -50, left: -50, bottom: -50, right: -50)
+        var rotationOffset: CGFloat { return (frame.width) / 2 + abs(layerInsets.top) }
+        _ = CGRect(x: (frame.minX - rotationOffset), y: (frame.minY - rotationOffset), width: frame.width, height: frame.height)
+        
+        
+    //    var offsetFromExterior: CGFloat { get }
+    //    let kTitleOffset: CGFloat = slice.offsetFromExterior
+        let titleXValue: CGFloat = frame.minX + 10
+        
+        func circularSegmentHeight(from degree:CGFloat) -> CGFloat {
+            return 2 * radius * sin(degree / 2.0 * CGFloat.pi/180)
+        }
+        
+        //var sliceDegree: CGFloat = 360.0 / CGFloat(10)
+           // sliceDegree = 360.0 / CGFloat(10)
+
+        let sectionWidthDegrees = 26.0
+        let circularSegmentHeight: CGFloat = 50
+        let titleWidthCoeficient: CGFloat = sin(CGFloat(sectionWidthDegrees / 2.0) * CGFloat.pi/180)
+        let titleHeightValue: CGFloat = circularSegmentHeight * 1
+        let titleWidthValue: CGFloat = (2 + titleWidthCoeficient * 0.2) * radius
+        let titleYPosition: CGFloat = frame.minY + frame.height / 2.0 - titleHeightValue / 2.0
+        
         // Отрисовка сектора
         UIGraphicsPushContext(context)
         
@@ -57,8 +80,17 @@ class FortuneWheelSlice: CALayer {
         // Заполняет цветом контур - обводку
         self.slice.borderColour.setStroke()
         path.stroke()
+    
         
-        (text as NSString).draw(at: CGPoint(x: self.position.x + (10 * sliceIndex), y: self.position.y + 0), withAttributes: [:])
+        //черный текст
+        (text as NSString).draw(at: CGPoint(x: self.position.x + (8 * sliceIndex), y: self.position.y - 15), withAttributes: [:])
+        
+        //// Title  Drawing
+//        let textRect = CGRect(x: (titleXValue - rotationOffset), y: (titleYPosition - rotationOffset), width: titleWidthValue, height: titleHeightValue)
+//        let textTextContent = slice.title
+        
+        let textRect = CGRect(x: (titleXValue - rotationOffset), y: (titleYPosition - rotationOffset), width: titleWidthValue, height: titleHeightValue)
+        let textTextContent = slice.text
         
         UIGraphicsPopContext()
     }

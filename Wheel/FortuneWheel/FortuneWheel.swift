@@ -8,7 +8,7 @@
 import UIKit
 
 
-class FortuneWheel: UIView {
+class FortuneWheel: UIView, CAAnimationDelegate {
     
     weak var delegate: FortuneWheelDelegate?
     
@@ -205,15 +205,67 @@ class FortuneWheel: UIView {
             // Проверка, есть ли в массиве хотя бы 2 сектора, если нет - ошибка
             if slices.count >= 2 {
                 self.wheelView.layer.sublayers?.forEach({$0.removeFromSuperlayer()})
-                self.sectorAngle = (2 * CGFloat.pi)/CGFloat(slices.count)
+                self.sectorAngle = (2 * CGFloat.pi)/CGFloat(slices.count) // 360 делим на число секторов
                 for (index,slice) in slices.enumerated() {
                     let sector = FortuneWheelSlice.init(frame: self.wheelView.bounds,
                                                         startAngle: self.sectorAngle * CGFloat(index),
                                                         sectorAngle: self.sectorAngle, slice: slice)
                     sector.sliceIndex = CGFloat(index)
-                    var sectorTextLayer = CATextLayer()
-                    sectorTextLayer.frame = self.wheelView.bounds
+                    
+                    let sectorTextLayer = CATextLayer() //синяя надпись
+                    sectorTextLayer.alignmentMode = .left
+                    sectorTextLayer.fontSize = 25
+                    let midAngle = 0.2
+                  //  sectorTextLayer.frame = self.wheelView.bounds
+                    sectorTextLayer.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
+                    sectorTextLayer.position = CGPoint(x: wheelView.center.x, y: wheelView.center.y)
+                    sectorTextLayer.transform = CATransform3DMakeRotation(CGFloat(midAngle), 0.0, 0.0, 1.0)
+                  //  sectorTextLayer.position = .init(x: 300, y: 250)
+                 //   sectorTextLayer.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+                    sectorTextLayer.foregroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
                     sectorTextLayer.string = slice.text
+                    
+                    
+                    
+//                    let textOnSlice: [String] = ["123", "234", "456"]
+//
+//                    func update(titleArray: [String]) {
+//                       let center = CGPoint(x: wheelView.bounds.size.width / 2.0, y: wheelView.bounds.size.height / 2.0)
+//                       let radius:CGFloat = min(wheelView.bounds.size.width, wheelView.bounds.size.height) / 2
+//                       let segmentSize = CGFloat((Double.pi*2) / Double(titleArray.count))
+//
+//                       for i in 0..<titleArray.count {
+//                           let startAngle = segmentSize*CGFloat(i) - segmentSize/2
+//                           let endAngle = segmentSize*CGFloat(i+1) - segmentSize/2
+//                           let midAngle = (startAngle+endAngle)/2
+//
+//                           let shapeLayer = CAShapeLayer()
+//                          // shapeLayer.fillColor = UIColor.random.cgColor
+//
+//                           let bezierPath = UIBezierPath(arcCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+//                           bezierPath.addLine(to: center)
+//                           shapeLayer.path = bezierPath.cgPath
+//
+//                        //   let height = titleArray[i].height(withConstrainedWidth: radius - 20, font: UIFont.systemFont(ofSize: 15))
+//                           let frame = shapeLayer.path?.boundingBoxOfPath ?? CGRect.zero
+//                           let textLayer = CATextLayer()
+//                           textLayer.frame = CGRect(x: 0, y: 0, width: 70, height: 50)
+//                           textLayer.position = CGPoint(x: wheelView.center.x, y: wheelView.center.y)
+//                           textLayer.fontSize = 15
+//                           textLayer.contentsScale = UIScreen.main.scale
+//                           textLayer.alignmentMode = .center
+//                           textLayer.string = titleArray[i]
+//                           textLayer.isWrapped = true
+//                           textLayer.backgroundColor = UIColor.black.cgColor
+//                           textLayer.foregroundColor = UIColor.white.cgColor
+//                           textLayer.transform = CATransform3DMakeRotation(midAngle, 0.0, 0.0, 1.0)
+//                           shapeLayer.addSublayer(textLayer)
+//                           self.wheelView.layer.addSublayer(shapeLayer)
+//                       }
+//
+//                    }
+//
+
                     sector.addSublayer(sectorTextLayer)
                     self.wheelView.layer.addSublayer(sector)
                     sector.setNeedsDisplay()
@@ -231,7 +283,7 @@ class FortuneWheel: UIView {
     }
 }
 
-extension FortuneWheel : CAAnimationDelegate {
+extension FortuneWheel {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         if flag {
             self.performFinish(error: nil)
