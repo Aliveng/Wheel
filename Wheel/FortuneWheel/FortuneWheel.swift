@@ -153,6 +153,7 @@ class FortuneWheel: UIView, CAAnimationDelegate {
         self.indicator.frame = CGRect.init(origin: position,
                                            size: self.indicatorSize)
         self.indicator.image = UIImage.init(named: "pointer")
+        self.indicator.tintColor = .white
         if self.indicator.superview == nil {
             self.addSubview(self.indicator)
         }
@@ -173,7 +174,7 @@ class FortuneWheel: UIView, CAAnimationDelegate {
         self.playButton.clipsToBounds = true
         self.playButton.backgroundColor = .white
         self.playButton.layer.borderWidth = 0.5
-        self.playButton.layer.borderColor = UIColor.black.cgColor
+        self.playButton.layer.borderColor = UIColor.lightGray.cgColor
         self.addSubview(self.playButton)
     }
     
