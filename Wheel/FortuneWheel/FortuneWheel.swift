@@ -212,29 +212,30 @@ class FortuneWheel: UIView, CAAnimationDelegate {
                                                         sectorAngle: self.sectorAngle, slice: slice)
                     sector.sliceIndex = CGFloat(index)
                     
-                    // Поворот синей надписи в секторе
+                    // Поворот надписи в секторе
                     let sectorTextLayer = CATextLayer()
                     sectorTextLayer.alignmentMode = .left
-                    sectorTextLayer.fontSize = 15
-                    sectorTextLayer.frame = CGRect(x: 0, y: 0, width: 100, height: 80)
-                    sectorTextLayer.position = CGPoint(x: wheelView.center.x + 80,
+                    sectorTextLayer.fontSize = 18
+                    sectorTextLayer.frame = CGRect(x: 0, y: 0, width: 100, height: 60)
+                    sectorTextLayer.position = CGPoint(x: wheelView.center.x + 100,
                                                        y: wheelView.center.y)
                 
                     
-//                    sectorTextLayer.transform = CATransform3DMakeRotation(self.sectorAngle * CGFloat(index), 0.0, 0.0, 0.0)
+                    var startTransform = CATransform3DIdentity
                     
-                    var rotationWithPerspective = CATransform3DIdentity
-                    rotationWithPerspective.m34 = -1.0/500.0/2/2
-                    let radians = 22.5 * M_PI / 180
-                    rotationWithPerspective = CATransform3DRotate(rotationWithPerspective, CGFloat(radians), 0, 1, 0)
-                    sectorTextLayer.transform = rotationWithPerspective
+                    let rotationDegrees: CGFloat = -12.0
+                    let rotationRadians: CGFloat = rotationDegrees * (CGFloat.pi/180.0)
+                    let offset = CGPoint(x: -20, y: -27)
+                    startTransform = CATransform3DRotate(CATransform3DIdentity,
+                                                                  rotationRadians, 0.0, 0.0, 1.0)
+                    startTransform = CATransform3DTranslate(startTransform,
+                                                            offset.x, offset.y, 0.0)
                     
-                   // sectorTextLayer.transform = CATransform3DMakeRotation(CGFloat.pi, 0.0, 0.0, 0.0)
-                 //   sectorTextLayer.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-                    sectorTextLayer.foregroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+                    sectorTextLayer.transform = startTransform
+
+                    sectorTextLayer.foregroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                     sectorTextLayer.string = slice.text
                     
-
                     sector.addSublayer(sectorTextLayer)
                     self.wheelView.layer.addSublayer(sector)
                     sector.setNeedsDisplay()
