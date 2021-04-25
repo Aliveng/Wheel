@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Wheel
+//  FWheel
 //
-//  Created by Татьяна Севостьянова on 16.04.2021.
+//  Created by Татьяна Севостьянова on 25.04.2021.
 //
 
 import UIKit
