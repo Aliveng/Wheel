@@ -32,6 +32,12 @@ class ViewController: UIViewController {
         label.numberOfLines = 0
         return label
     }()
+    
+    lazy var arrowView: UIImageView = {
+        let arrow = UIImageView()
+        arrow.image = .arrow
+        return arrow
+    }()
 
     lazy var rotateButton: UIButton = {
         let button = UIButton()
@@ -74,6 +80,7 @@ class ViewController: UIViewController {
         view.addSubview(rotateButton)
         view.addSubview(titleLabel)
         view.addSubview(bottomLabel)
+        view.addSubview(arrowView)
         
         spinningWheel.snp.makeConstraints {
             $0.height.width.equalTo(227.97)
@@ -93,6 +100,12 @@ class ViewController: UIViewController {
         rotateButton.snp.makeConstraints {
             $0.height.width.equalTo(45.59)
             $0.center.equalTo(spinningWheel.snp.center)
+        }
+        
+        arrowView.snp.makeConstraints {
+            $0.height.width.equalTo(29.64)
+            $0.right.equalToSuperview().inset(55) // насколько заходит на колесо
+            $0.centerY.equalToSuperview()
         }
         
         spinningWheel.slices.enumerated().forEach { (pair) in
