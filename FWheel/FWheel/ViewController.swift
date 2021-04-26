@@ -104,7 +104,7 @@ class ViewController: UIViewController {
         
         arrowView.snp.makeConstraints {
             $0.height.width.equalTo(29.64)
-            $0.right.equalToSuperview().inset(55) // насколько заходит на колесо
+            $0.left.equalTo(spinningWheel.snp.right).inset(10) // насколько заходит на колесо
             $0.centerY.equalToSuperview()
         }
         
