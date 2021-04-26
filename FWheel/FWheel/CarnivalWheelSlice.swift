@@ -39,7 +39,7 @@ public class CarnivalWheelSlice: FortuneWheelSliceProtocol {
     }
     
     public var offsetFromExterior:CGFloat {
-        return 10.0
+        return 18.0
     }
     
     public var font: UIFont {
