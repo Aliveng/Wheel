@@ -25,6 +25,8 @@
 		0F30957526354A8000BABD8B /* Phosphate.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 0F30957126354A8000BABD8B /* Phosphate.ttc */; };
 		0F30957626354A8000BABD8B /* BEBAS___.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F30957226354A8000BABD8B /* BEBAS___.ttf */; };
 		0F30958726355B3A00BABD8B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0F30958626355B3A00BABD8B /* SnapKit */; };
+		0F3095922636AA8A00BABD8B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3095912636AA8A00BABD8B /* Colors.swift */; };
+		0F3095972636AAA200BABD8B /* UIColor+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3095962636AAA200BABD8B /* UIColor+extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		0F30957026354A8000BABD8B /* Chunkfive.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chunkfive.otf; sourceTree = "<group>"; };
 		0F30957126354A8000BABD8B /* Phosphate.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Phosphate.ttc; sourceTree = "<group>"; };
 		0F30957226354A8000BABD8B /* BEBAS___.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BEBAS___.ttf"; sourceTree = "<group>"; };
+		0F3095912636AA8A00BABD8B /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		0F3095962636AAA200BABD8B /* UIColor+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,8 +132,10 @@
 				0F30954726353A6800BABD8B /* TTFortuneWheel.swift */,
 				0F3095692635408900BABD8B /* CarnivalWheelSlice.swift */,
 				0F30955626353CFF00BABD8B /* Utils.swift */,
-				0F3095122635392F00BABD8B /* Assets.xcassets */,
+				0F3095912636AA8A00BABD8B /* Colors.swift */,
+				0F3095962636AAA200BABD8B /* UIColor+extensions.swift */,
 				0F30956E26354A8000BABD8B /* Resources */,
+				0F3095122635392F00BABD8B /* Assets.xcassets */,
 				0F3095142635392F00BABD8B /* LaunchScreen.storyboard */,
 				0F3095172635392F00BABD8B /* Info.plist */,
 			);
@@ -305,7 +311,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F30954D26353B2900BABD8B /* SpinningWheelAnimator.swift in Sources */,
+				0F3095922636AA8A00BABD8B /* Colors.swift in Sources */,
 				0F30954326353A0400BABD8B /* FortuneWheelLayer.swift in Sources */,
+				0F3095972636AAA200BABD8B /* UIColor+extensions.swift in Sources */,
 				0F30956A2635408900BABD8B /* CarnivalWheelSlice.swift in Sources */,
 				0F30950E2635392E00BABD8B /* ViewController.swift in Sources */,
 				0F30950A2635392E00BABD8B /* AppDelegate.swift in Sources */,

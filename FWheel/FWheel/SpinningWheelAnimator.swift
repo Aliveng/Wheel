@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import CoreGraphics
 
+
 protocol SpinningAnimatorProtocol: class  {
     var layerToAnimate:CALayer { get }
 }
@@ -29,7 +30,6 @@ class SpinningWheelAnimator : NSObject, CAAnimationDelegate {
     init(withObjectToAnimate animationObject:SpinningAnimatorProtocol) {
         self.animationObject = animationObject
     }
-    
     
     func addIndefiniteRotationAnimation() {
         

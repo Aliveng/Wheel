@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 
+
 class ViewController: UIViewController {
 
     lazy var rotateButton: UIButton = {
@@ -18,7 +19,6 @@ class ViewController: UIViewController {
         button.addTarget(self, action: #selector(didTapRotateButton), for: .touchUpInside)
         return button
     }()
-    
     
     lazy var spinningWheel: TTFortuneWheel = {
         let spinningWheel = TTFortuneWheel(frame: .zero, slices: [])
@@ -49,8 +49,6 @@ class ViewController: UIViewController {
         spinningWheel.snp.makeConstraints {
             $0.height.width.equalTo(337)
             $0.center.equalToSuperview()
-          //  $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-          //  $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
         
         rotateButton.snp.makeConstraints {
@@ -58,20 +56,6 @@ class ViewController: UIViewController {
             $0.center.equalTo(spinningWheel.snp.center)
         }
         
-        
-//        let slices = [ CarnivalWheelSlice.init(title: "Roller Coaster"),
-//                       CarnivalWheelSlice.init(title: "Try again"),
-//                       CarnivalWheelSlice.init(title: "Free\nticket"),
-//                       CarnivalWheelSlice.init(title: "Teddy\nbear"),
-//                       CarnivalWheelSlice.init(title: "Large popcorn"),
-//                       CarnivalWheelSlice.init(title: "Balloon figures"),
-//                       CarnivalWheelSlice.init(title: "Ferris Wheel"),
-//                       CarnivalWheelSlice.init(title: "Pony\nRide")]
-//
-//        spinningWheel.slices = slices
-//        spinningWheel.equalSlices = true
-//        spinningWheel.frameStroke.width = 0
-//        spinningWheel.titleRotation = CGFloat.pi
         spinningWheel.slices.enumerated().forEach { (pair) in
             let slice = pair.element as! CarnivalWheelSlice
             let offset = pair.offset
@@ -101,4 +85,3 @@ class ViewController: UIViewController {
         }
     }
 }
-
