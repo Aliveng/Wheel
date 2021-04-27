@@ -42,22 +42,22 @@ class ViewController: UIViewController {
     lazy var rotateButton: UIButton = {
         let button = UIButton()
         button.setTitle("", for: .normal)
-//        button.backgroundColor = .sliceTwo
         button.frame = CGRect(x: spinningWheel.center.x, y: spinningWheel.center.y, width: 50, height: 50)
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.borderWheel.cgColor
+        button.layer.borderColor = UIColor.sliceOne.cgColor
         button.layer.cornerRadius = 25
         button.addTarget(self, action: #selector(didTapRotateButton), for: .touchUpInside)
         
-        let gradient: CAGradientLayer = CAGradientLayer()
-        gradient.colors = [UIColor.blue.cgColor, UIColor.red.cgColor]
-        gradient.locations = [0.0 , 1.0]
-        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
-        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
-        gradient.frame = button.frame
+        let radialGradient: CAGradientLayer = CAGradientLayer()
+        radialGradient.type = .radial
+        radialGradient.colors = [UIColor.sliceOne.cgColor, UIColor.sliceTwo.cgColor]
+        radialGradient.startPoint = CGPoint(x: 0.45, y: 0.45)
+        let endY = 0.45 + button.frame.size.width / button.frame.size.height / 2
+        radialGradient.endPoint = CGPoint(x: 1, y: endY)
+        radialGradient.frame = button.frame
         
         button.clipsToBounds = true
-        button.layer.insertSublayer(gradient, at: 0)
+        button.layer.insertSublayer(radialGradient, at: 0)
         
         return button
     }()
@@ -69,10 +69,10 @@ class ViewController: UIViewController {
                        LilacWheelSlice.init(title: "15 %"), // Сектор который будет выбран
                        LilacWheelSlice.init(title: "Название"),
                        LilacWheelSlice.init(title: "42 %"),
-                       LilacWheelSlice.init(title: "скидка 6 %"),
+                       LilacWheelSlice.init(title: "скидка 6%"),
                        LilacWheelSlice.init(title: "Название"),
                        LilacWheelSlice.init(title: "42 %"),
-                       LilacWheelSlice.init(title: "скидка 5 %")]
+                       LilacWheelSlice.init(title: "скидка 5%")]
         
         spinningWheel.slices = slices
         spinningWheel.equalSlices = true
