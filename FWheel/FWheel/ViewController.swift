@@ -42,20 +42,21 @@ class ViewController: UIViewController {
     lazy var rotateButton: UIButton = {
         let button = UIButton()
         button.setTitle("", for: .normal)
-        button.backgroundColor = .sliceTwo
+//        button.backgroundColor = .sliceTwo
         button.frame = CGRect(x: spinningWheel.center.x, y: spinningWheel.center.y, width: 50, height: 50)
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.borderWheel.cgColor
         button.layer.cornerRadius = 25
         button.addTarget(self, action: #selector(didTapRotateButton), for: .touchUpInside)
         
-        let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.blue, UIColor.red]
-        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
-        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.colors = [UIColor.blue.cgColor, UIColor.red.cgColor]
         gradient.locations = [0.0 , 1.0]
+        gradient.startPoint = CGPoint(x: 0.0, y: 1.0)
+        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
         gradient.frame = button.frame
         
+        button.clipsToBounds = true
         button.layer.insertSublayer(gradient, at: 0)
         
         return button
@@ -65,7 +66,7 @@ class ViewController: UIViewController {
         let spinningWheel = FortuneWheel(frame: .zero, slices: [])
         
         let slices = [ LilacWheelSlice.init(title: "42 %"),
-                       LilacWheelSlice.init(title: "15 %"),
+                       LilacWheelSlice.init(title: "15 %"), // Сектор который будет выбран
                        LilacWheelSlice.init(title: "Название"),
                        LilacWheelSlice.init(title: "42 %"),
                        LilacWheelSlice.init(title: "скидка 6 %"),

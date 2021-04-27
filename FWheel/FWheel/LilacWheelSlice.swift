@@ -36,6 +36,7 @@ public class LilacWheelSlice: SpinningWheelSliceProtocol {
     
     public var font: UIFont {
         return UIFont.systemFont(ofSize: 12)
+// Можно установить разные шрифты для секторов
 //        switch style {
 //        case .sliceOne: return UIFont(name: "", size: 22.0)!
 //        case .sliceTwo: return UIFont(name: "", size: 20.0)!

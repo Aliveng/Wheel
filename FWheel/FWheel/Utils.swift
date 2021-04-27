@@ -34,15 +34,15 @@ public class Utils {
     }
     
     class func maxDuration(ofAnimations anims: [CAAnimation]) -> CFTimeInterval{
-        var maxDuration: CGFloat = 0;
+        var maxDuration: CGFloat = 0
         for anim in anims {
-            maxDuration = max(CGFloat(anim.beginTime + anim.duration) * CGFloat(anim.repeatCount == 0 ? 1.0 : anim.repeatCount) * (anim.autoreverses ? 2.0 : 1.0), maxDuration);
+            maxDuration = max(CGFloat(anim.beginTime + anim.duration) * CGFloat(anim.repeatCount == 0 ? 1.0 : anim.repeatCount) * (anim.autoreverses ? 2.0 : 1.0), maxDuration)
         }
         
         if maxDuration.isInfinite {
             return TimeInterval(NSIntegerMax)
         }
-        return CFTimeInterval(maxDuration);
+        return CFTimeInterval(maxDuration)
     }
     
     class func maxDuration(ofEffectAnimation anim: CAAnimation, sublayersCount : NSInteger) -> CFTimeInterval{
