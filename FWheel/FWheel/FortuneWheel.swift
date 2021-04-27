@@ -12,12 +12,11 @@ public class FortuneWheel: UIControl, CAAnimationDelegate, SpinningAnimatorProto
     
     // Установите true, если вы хотите, чтобы все сектора распределялись равномерно
     open var equalSlices: Bool = false
-    open var slices:[SpinningWheelSliceProtocol]!
+    open var slices: [SpinningWheelSliceProtocol]!
     
     // Настройки основного фрейма
     open var frameStroke: StrokeInfo = StrokeInfo(color: .borderWheel, width: 8)
     open var shadow: NSShadow?
-    
     
     // Установите значение, чтобы начать рисовать с таким смешением
     // Центр первого сектора для этого смещения будет равен 0
@@ -71,7 +70,7 @@ public class FortuneWheel: UIControl, CAAnimationDelegate, SpinningAnimatorProto
     
     internal var defaultShadow:NSShadow {
         let shadow = NSShadow()
-        shadow.shadowColor = UIColor.black.withAlphaComponent(0.5)
+        shadow.shadowColor = UIColor.black.withAlphaComponent(0.4)
         shadow.shadowOffset = CGSize(width: 0, height: 0)
         shadow.shadowBlurRadius = 14
         return shadow

@@ -22,7 +22,8 @@ public class FortuneWheelSlice: SpinningWheelSliceProtocol {
     
     public var backgroundColor: UIColor? {
         switch style {
-        case .dark: return Utils.uiColor(from: 0x320A51)
+//        case .dark: return Utils.uiColor(from: 0x320A51)
+        case .dark: return .darkStyle
         case .light: return UIColor.white
         }
     }
@@ -30,7 +31,8 @@ public class FortuneWheelSlice: SpinningWheelSliceProtocol {
     public var fontColor: UIColor {
         switch style {
         case .dark: return UIColor.white
-        case .light: return Utils.uiColor(from: 0x320A51)
+//        case .light: return Utils.uiColor(from: 0x320A51)
+        case .light: return .darkStyle
         }
     }
     

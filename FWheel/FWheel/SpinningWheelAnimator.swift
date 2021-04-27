@@ -16,12 +16,12 @@ protocol SpinningAnimatorProtocol: class  {
 
 class SpinningWheelAnimator: NSObject, CAAnimationDelegate {
     
-    weak var animationObject:SpinningAnimatorProtocol!
+    weak var animationObject: SpinningAnimatorProtocol!
     
     internal var completionBlocks = [CAAnimation: (Bool) -> Void]()
     internal var updateLayerValueForCompletedAnimation: Bool = false
     
-    var fullRotationsUntilFinish:Int = 13
+    var fullRotationsUntilFinish: Int = 13
     var rotationTime: CFTimeInterval = 5.000
     
     init(withObjectToAnimate animationObject: SpinningAnimatorProtocol) {
@@ -35,7 +35,7 @@ class SpinningWheelAnimator: NSObject, CAAnimationDelegate {
         starTransformAnim.keyTimes = [0, 1]
         starTransformAnim.duration = rotationTime
         
-        let starRotationAnim: CAAnimationGroup = Utils.group(animations: [starTransformAnim], fillMode:fillMode)
+        let starRotationAnim: CAAnimationGroup = Utils.group(animations: [starTransformAnim], fillMode: fillMode)
         starRotationAnim.repeatCount = Float.infinity
         animationObject.layerToAnimate.add(starRotationAnim, forKey: "starRotationIndefiniteAnim")
     }
@@ -61,10 +61,10 @@ class SpinningWheelAnimator: NSObject, CAAnimationDelegate {
         let starTransformAnim = CAKeyframeAnimation(keyPath: "transform.rotation.z")
         starTransformAnim.values = [0, rotation * CGFloat.pi/180]
         starTransformAnim.keyTimes = [0, 1]
-        starTransformAnim.duration = 5
+        starTransformAnim.duration = 5 // последняя стадия вращения
         starTransformAnim.timingFunction = CAMediaTimingFunction(controlPoints: 0.0256, 0.874, 0.675, 1)
         
-        let starRotationAnim : CAAnimationGroup = Utils.group(animations: [starTransformAnim], fillMode:fillMode)
+        let starRotationAnim: CAAnimationGroup = Utils.group(animations: [starTransformAnim], fillMode:fillMode)
         animationObject.layerToAnimate.add(starRotationAnim, forKey: "starRotationAnim")
     }
     

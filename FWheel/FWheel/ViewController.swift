@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.setTitle("", for: .normal)
         button.backgroundColor = .sliceTwo
-        //  button.frame = CGRect(x: spinningWheel.center.x, y: spinningWheel.center.y, width: 50, height: 50)
+        button.frame = CGRect(x: spinningWheel.center.x, y: spinningWheel.center.y, width: 50, height: 50)
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.borderWheel.cgColor
         button.layer.cornerRadius = 25
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
         spinningWheel.slices = slices
         spinningWheel.equalSlices = true
         spinningWheel.frameStroke.width = 1
-        spinningWheel.titleRotation = CGFloat.pi
+        spinningWheel.titleRotation = CGFloat.pi // Поворот надписи внутри сектора
         
         return spinningWheel
     }()
@@ -114,8 +114,8 @@ class ViewController: UIViewController {
         }
         
         arrowView.snp.makeConstraints {
-            $0.height.width.equalTo(29.64)
-            $0.left.equalTo(spinningWheel.snp.right).inset(10) // насколько заходит на колесо
+            $0.height.width.equalTo(40)
+            $0.left.equalTo(spinningWheel.snp.right).inset(14) // насколько заходит на колесо
             $0.centerY.equalToSuperview()
         }
         

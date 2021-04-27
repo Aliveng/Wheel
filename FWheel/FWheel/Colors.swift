@@ -16,5 +16,7 @@ extension UIColor {
     static let sliceText = UIColor(hex: "725BA3") // Текст на секторе
     static let titleColor = UIColor(hex: "451818") // Заголовок
     static let bottomTextColor = UIColor(hex: "451818") // Подпись под колесом
-    static let background = UIColor(hex: "E5E5E5") // Фон 
+    static let background = UIColor(hex: "E5E5E5") // Фон
+    
+    static let darkStyle = UIColor(hex: "0x320A51") // Цвет для темного стиля
 }

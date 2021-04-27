@@ -11,15 +11,6 @@ import UIKit
 
 public class Utils {
     
-    public class func uiColor(from rgbValue: UInt, alpha: CGFloat = 1.0) -> UIColor {
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(alpha)
-        )
-    }
-    
     class func group(animations: [CAAnimation], fillMode: String!, forEffectLayer: Bool = false, sublayersCount: NSInteger = 0) -> CAAnimationGroup!{
         let groupAnimation = CAAnimationGroup()
         groupAnimation.animations = animations
@@ -85,9 +76,9 @@ public class Utils {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         
-        for aLayer in layers{
+        for aLayer in layers {
             if let keys = aLayer.animationKeys() as [String]? {
-                for animKey in keys{
+                for animKey in keys {
                     let anim = aLayer.animation(forKey: animKey)
                     updateValue(forAnimation: anim!, theLayer: aLayer)
                 }
@@ -97,19 +88,18 @@ public class Utils {
         CATransaction.commit()
     }
     
-    class func updateValue(forAnimation anim: CAAnimation, theLayer : CALayer){
+    class func updateValue(forAnimation anim: CAAnimation, theLayer : CALayer) {
         if let basicAnim = anim as? CABasicAnimation{
             if (!basicAnim.autoreverses) {
                 theLayer.setValue(basicAnim.toValue, forKeyPath: basicAnim.keyPath!)
             }
-        } else if let keyAnim = anim as? CAKeyframeAnimation{
+        } else if let keyAnim = anim as? CAKeyframeAnimation {
             if (!keyAnim.autoreverses) {
                 theLayer.setValue(keyAnim.values?.last, forKeyPath: keyAnim.keyPath!)
             }
-        } else if let groupAnim = anim as? CAAnimationGroup{
-            for subAnim in groupAnim.animations! as [CAAnimation]{
-                updateValue(forAnimation: subAnim, theLayer: theLayer);
-                
+        } else if let groupAnim = anim as? CAAnimationGroup {
+            for subAnim in groupAnim.animations! as [CAAnimation] {
+                updateValue(forAnimation: subAnim, theLayer: theLayer)
             }
         }
     }

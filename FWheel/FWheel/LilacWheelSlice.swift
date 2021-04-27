@@ -30,20 +30,21 @@ public class LilacWheelSlice: SpinningWheelSliceProtocol {
         return UIColor.white
     }
     
-    public var offsetFromExterior:CGFloat {
+    public var offsetFromExterior: CGFloat { // отступ надписей внутри сектора от края колеса
         return 18.0
     }
     
     public var font: UIFont {
         return UIFont.systemFont(ofSize: 12)
 //        switch style {
-//        case .sliceOne: return UIFont(name: "ChunkFive", size: 22.0)!
+//        case .sliceOne: return UIFont(name: "", size: 22.0)!
+//        case .sliceTwo: return UIFont(name: "", size: 20.0)!
 //        }
     }
     
     public var style: Style = .sliceOne
     
-    public init(title:String) {
+    public init(title: String) {
         self.title = title
     }
     
