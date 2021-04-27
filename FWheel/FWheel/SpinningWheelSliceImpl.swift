@@ -1,12 +1,16 @@
-import Foundation
+//
+//  SpinningWheelSliceImpl.swift
+//  FWheel
+//
+//  Created by Татьяна Севостьянова on 25.04.2021.
+//
+
 import UIKit
 
-//Just a basic implementation of spinning wheel slice
-public class FortuneWheelSlice: FortuneWheelSliceProtocol {
-//   public var stroke: StrokeInfo?
+// Базовая реализация сектора
+public class FortuneWheelSlice: SpinningWheelSliceProtocol {
     
     public var offsetFromExterior: CGFloat = 10
-    
     
     public enum Style {
         case dark
@@ -18,7 +22,7 @@ public class FortuneWheelSlice: FortuneWheelSliceProtocol {
     
     public var backgroundColor: UIColor? {
         switch style {
-        case .dark: return TTUtils.uiColor(from: 0x320A51)
+        case .dark: return Utils.uiColor(from: 0x320A51)
         case .light: return UIColor.white
         }
     }
@@ -26,27 +30,25 @@ public class FortuneWheelSlice: FortuneWheelSliceProtocol {
     public var fontColor: UIColor {
         switch style {
         case .dark: return UIColor.white
-        case .light: return TTUtils.uiColor(from: 0x320A51)
+        case .light: return Utils.uiColor(from: 0x320A51)
         }
     }
-        
+    
     public var font: UIFont {
         return UIFont.systemFont(ofSize: fontSize, weight: .bold)
     }
     
-    public var style:Style = .dark
-    
-    public init(title:String) {
+    public var style: Style = .dark
+    public init(title: String) {
         self.title = title
     }
     
-    
-    public convenience init(title:String, degree:CGFloat) {
-        self.init(title:title)
+    public convenience init(title: String, degree: CGFloat) {
+        self.init(title: title)
         self.degree = degree
     }
     
-    public func drawAdditionalGraphics(in context:CGContext, circularSegmentHeight:CGFloat,radius:CGFloat,sliceDegree:CGFloat) {
+    public func drawAdditionalGraphics(in context: CGContext, circularSegmentHeight: CGFloat, radius: CGFloat, sliceDegree: CGFloat) {
         let image = UIImage(named: "niddleImage", in: Bundle.sw_frameworkBundle(), compatibleWith: nil)!
         let centerOffset = CGPoint(x: -64, y: 17)
         let additionalGraphicRect = CGRect(x: centerOffset.x, y: centerOffset.y, width: 12, height: 12)

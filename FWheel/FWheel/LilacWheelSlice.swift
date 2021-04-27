@@ -9,13 +9,9 @@
 import Foundation
 import UIKit
 
-public class CarnivalWheelSlice: FortuneWheelSliceProtocol {
+public class LilacWheelSlice: SpinningWheelSliceProtocol {
     
     public enum Style {
-//        case brickRed
-//        case sandYellow
-//        case babyBlue
-//        case deepBlue
         case sliceOne
         case sliceTwo
     }
@@ -25,10 +21,6 @@ public class CarnivalWheelSlice: FortuneWheelSliceProtocol {
     
     public var backgroundColor: UIColor? {
         switch style {
-//        case .brickRed: return TTUtils.uiColor(from:0xE27230)
-//        case .sandYellow: return TTUtils.uiColor(from:0xF7D565)
-//        case .babyBlue: return TTUtils.uiColor(from:0x93D0C4)
-//        case .deepBlue: return TTUtils.uiColor(from:0x2A7F7F)
         case .sliceOne: return .sliceOne
         case .sliceTwo: return .sliceTwo
         }
@@ -45,16 +37,9 @@ public class CarnivalWheelSlice: FortuneWheelSliceProtocol {
     public var font: UIFont {
         return UIFont.systemFont(ofSize: 12)
 //        switch style {
-//        case .brickRed: return UIFont(name: "ChunkFive", size: 22.0)!
-//        case .sandYellow: return UIFont(name: "Lobster 1.3", size: 22.0)!
-//        case .babyBlue: return UIFont(name: "Phosphate", size: 22.0)!
-//        case .deepBlue: return UIFont(name: "Bebas", size: 22.0)!
+//        case .sliceOne: return UIFont(name: "ChunkFive", size: 22.0)!
 //        }
     }
-    
-//    public var stroke: StrokeInfo? {
-//        return StrokeInfo(color: UIColor.white, width: 1.0)
-//    }
     
     public var style: Style = .sliceOne
     
@@ -66,5 +51,4 @@ public class CarnivalWheelSlice: FortuneWheelSliceProtocol {
         self.init(title:title)
         self.degree = degree
     }
-    
 }

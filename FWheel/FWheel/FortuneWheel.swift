@@ -1,36 +1,35 @@
 //
-//  TTFortuneWheel.swift
+//  FortuneWheel.swift
 //  FWheel
 //
 //  Created by Татьяна Севостьянова on 25.04.2021.
 //
 
-
 import UIKit
 
-public class TTFortuneWheel: UIControl, CAAnimationDelegate, SpinningAnimatorProtocol {
-    
-    /// Set to true if you want all slices to be disributed evenly
-    open var equalSlices:Bool = false
-    
-    open var slices:[FortuneWheelSliceProtocol]!
-    
-    /// UIConfiguration of the main frame
-    open var frameStroke:StrokeInfo = StrokeInfo(color: .borderWheel, width: 8)
-    open var shadow:NSShadow?
-    
-    
-    /// Set this to start drawing from that offset
-    /// The sliced centerd to this offset will be 0 indexed one
-    open var initialDrawingOffset:CGFloat = 0.0
-    
-    open var titleRotation:CGFloat = 0.0
-    
-    lazy private var animator:SpinningWheelAnimator = SpinningWheelAnimator(withObjectToAnimate: self)
-    private(set) var sliceDegree:CGFloat?
-    private(set) var wheelLayer:FortuneWheelLayer!
 
-    public init(frame: CGRect, slices:[FortuneWheelSliceProtocol]) {
+public class FortuneWheel: UIControl, CAAnimationDelegate, SpinningAnimatorProtocol {
+    
+    // Установите true, если вы хотите, чтобы все сектора распределялись равномерно
+    open var equalSlices: Bool = false
+    open var slices:[SpinningWheelSliceProtocol]!
+    
+    // Настройки основного фрейма
+    open var frameStroke: StrokeInfo = StrokeInfo(color: .borderWheel, width: 8)
+    open var shadow: NSShadow?
+    
+    
+    // Установите значение, чтобы начать рисовать с таким смешением
+    // Центр первого сектора для этого смещения будет равен 0
+    open var initialDrawingOffset: CGFloat = 0.0
+    
+    open var titleRotation: CGFloat = 0.0
+    
+    lazy private var animator: SpinningWheelAnimator = SpinningWheelAnimator(withObjectToAnimate: self)
+    private(set) var sliceDegree: CGFloat?
+    private(set) var wheelLayer: FortuneWheelLayer!
+    
+    public init(frame: CGRect, slices:[SpinningWheelSliceProtocol]) {
         super.init(frame: frame)
         self.slices = slices
         self.shadow = defaultShadow
@@ -65,7 +64,7 @@ public class TTFortuneWheel: UIControl, CAAnimationDelegate, SpinningAnimatorPro
     }
     
     private func addWheelLayer() {
-        wheelLayer = FortuneWheelLayer(frame:self.bounds,parent:self,initialOffset:initialDrawingOffset)
+        wheelLayer = FortuneWheelLayer(frame: self.bounds, parent: self, initialOffset: initialDrawingOffset)
         self.layer.addSublayer(wheelLayer)
         wheelLayer.setNeedsDisplay()
     }
@@ -78,17 +77,17 @@ public class TTFortuneWheel: UIControl, CAAnimationDelegate, SpinningAnimatorPro
         return shadow
     }
     
-    //// Animation conformance
+    // Подписка анимации
     internal var layerToAnimate: CALayer {
         return self.wheelLayer
     }
     
-    open func startAnimating(rotationCompletionOffset:CGFloat = 0.0, _ completion:((Bool) -> Void)?) {
+    open func startAnimating(rotationCompletionOffset: CGFloat = 0.0, _ completion:((Bool) -> Void)?) {
         self.stopAnimating()
-        self.animator.addRotationAnimation(completionBlock: completion,rotationOffset:rotationCompletionOffset)
+        self.animator.addRotationAnimation(completionBlock: completion, rotationOffset: rotationCompletionOffset)
     }
     
-    open func startAnimating(fininshIndex:Int = 0, _ completion:((Bool) -> Void)?) {
+    open func startAnimating(fininshIndex: Int = 0, _ completion:((Bool) -> Void)?) {
         let rotation = 360.0 - computeRadian(from: fininshIndex)
         self.startAnimating(rotationCompletionOffset: rotation, completion)
     }
@@ -101,12 +100,12 @@ public class TTFortuneWheel: UIControl, CAAnimationDelegate, SpinningAnimatorPro
         self.animator.removeAllAnimations()
     }
     
-    open func startAnimating(fininshIndex:Int = 0, offset:CGFloat, _ completion:((Bool) -> Void)?) {
+    open func startAnimating(fininshIndex: Int = 0, offset: CGFloat, _ completion:((Bool) -> Void)?) {
         let rotation = 360.0 - computeRadian(from: fininshIndex) + offset
         self.startAnimating(rotationCompletionOffset: rotation, completion)
     }
     
-    private func computeRadian(from finishIndex:Int) -> CGFloat {
+    private func computeRadian(from finishIndex: Int) -> CGFloat {
         if equalSlices {
             return CGFloat(finishIndex) * sliceDegree!
         }

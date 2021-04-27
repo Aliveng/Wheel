@@ -38,36 +38,47 @@ class ViewController: UIViewController {
         arrow.image = .arrow
         return arrow
     }()
-
+    
     lazy var rotateButton: UIButton = {
         let button = UIButton()
         button.setTitle("", for: .normal)
         button.backgroundColor = .sliceTwo
+        //  button.frame = CGRect(x: spinningWheel.center.x, y: spinningWheel.center.y, width: 50, height: 50)
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.sliceOne.cgColor
-        button.layer.cornerRadius = 22.795
+        button.layer.borderColor = UIColor.borderWheel.cgColor
+        button.layer.cornerRadius = 25
         button.addTarget(self, action: #selector(didTapRotateButton), for: .touchUpInside)
+        
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor.blue, UIColor.red]
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1.0, y: 1.0)
+        gradient.locations = [0.0 , 1.0]
+        gradient.frame = button.frame
+        
+        button.layer.insertSublayer(gradient, at: 0)
+        
         return button
     }()
     
-    lazy var spinningWheel: TTFortuneWheel = {
-        let spinningWheel = TTFortuneWheel(frame: .zero, slices: [])
+    lazy var spinningWheel: FortuneWheel = {
+        let spinningWheel = FortuneWheel(frame: .zero, slices: [])
         
-        let slices = [ CarnivalWheelSlice.init(title: "42 %"),
-                       CarnivalWheelSlice.init(title: "15 %"),
-                       CarnivalWheelSlice.init(title: "Название"),
-                       CarnivalWheelSlice.init(title: "42 %"),
-                       CarnivalWheelSlice.init(title: "скидка 6 %"),
-                       CarnivalWheelSlice.init(title: "Название"),
-                       CarnivalWheelSlice.init(title: "42 %"),
-                       CarnivalWheelSlice.init(title: "скидка 5 %")]
+        let slices = [ LilacWheelSlice.init(title: "42 %"),
+                       LilacWheelSlice.init(title: "15 %"),
+                       LilacWheelSlice.init(title: "Название"),
+                       LilacWheelSlice.init(title: "42 %"),
+                       LilacWheelSlice.init(title: "скидка 6 %"),
+                       LilacWheelSlice.init(title: "Название"),
+                       LilacWheelSlice.init(title: "42 %"),
+                       LilacWheelSlice.init(title: "скидка 5 %")]
         
         spinningWheel.slices = slices
         spinningWheel.equalSlices = true
         spinningWheel.frameStroke.width = 1
         spinningWheel.titleRotation = CGFloat.pi
         
-       return spinningWheel
+        return spinningWheel
     }()
     
     override func viewDidLoad() {
@@ -109,14 +120,9 @@ class ViewController: UIViewController {
         }
         
         spinningWheel.slices.enumerated().forEach { (pair) in
-            let slice = pair.element as! CarnivalWheelSlice
+            let slice = pair.element as! LilacWheelSlice
             let offset = pair.offset
             switch offset % 4 {
-//            case 0: slice.style = .brickRed
-//            case 1: slice.style = .sandYellow
-//            case 2: slice.style = .babyBlue
-//            case 3: slice.style = .deepBlue
-//            default: slice.style = .brickRed
             case 0: slice.style = .sliceTwo
             case 1: slice.style = .sliceOne
             case 2: slice.style = .sliceTwo
@@ -129,11 +135,10 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
-        // Dispose of any resources that can be recreated.
     }
     
-   @objc func didTapRotateButton() {
-
+    @objc func didTapRotateButton() {
+        
         spinningWheel.startAnimating()
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
             self.spinningWheel.startAnimating(fininshIndex: 5) { (finished) in

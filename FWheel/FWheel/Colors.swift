@@ -1,9 +1,8 @@
 //
 //  Colors.swift
-//  Doctor Plus
+//  FWheel
 //
-//  Created by Татьяна Севостьянова on 03.12.2019.
-//  Copyright © 2019 Татьяна Севостьянова. All rights reserved.
+//  Created by Татьяна Севостьянова on 25.04.2021.
 //
 
 import UIKit

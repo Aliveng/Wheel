@@ -1,5 +1,5 @@
 //
-//  TTUtils.swift
+//  Utils.swift
 //  FWheel
 //
 //  Created by Татьяна Севостьянова on 25.04.2021.
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-public class TTUtils {
+public class Utils {
     
     public class func uiColor(from rgbValue: UInt, alpha: CGFloat = 1.0) -> UIColor {
         return UIColor(
@@ -20,9 +20,7 @@ public class TTUtils {
         )
     }
     
-    //QuartzCode methods utils
-    
-    class func group(animations : [CAAnimation], fillMode : String!, forEffectLayer : Bool = false, sublayersCount : NSInteger = 0) -> CAAnimationGroup!{
+    class func group(animations: [CAAnimation], fillMode: String!, forEffectLayer: Bool = false, sublayersCount: NSInteger = 0) -> CAAnimationGroup!{
         let groupAnimation = CAAnimationGroup()
         groupAnimation.animations = animations
         
@@ -36,12 +34,11 @@ public class TTUtils {
             groupAnimation.isRemovedOnCompletion = false
         }
         
-        if forEffectLayer{
-            groupAnimation.duration = TTUtils.maxDuration(ofEffectAnimation: groupAnimation, sublayersCount: sublayersCount)
-        }else{
-            groupAnimation.duration = TTUtils.maxDuration(ofAnimations: animations)
+        if forEffectLayer {
+            groupAnimation.duration = Utils.maxDuration(ofEffectAnimation: groupAnimation, sublayersCount: sublayersCount)
+        } else {
+            groupAnimation.duration = Utils.maxDuration(ofAnimations: animations)
         }
-        
         return groupAnimation
     }
     
@@ -54,49 +51,47 @@ public class TTUtils {
         if maxDuration.isInfinite {
             return TimeInterval(NSIntegerMax)
         }
-        
         return CFTimeInterval(maxDuration);
     }
     
     class func maxDuration(ofEffectAnimation anim: CAAnimation, sublayersCount : NSInteger) -> CFTimeInterval{
-        var maxDuration : CGFloat = 0
-        if let groupAnim = anim as? CAAnimationGroup{
+        var maxDuration: CGFloat = 0
+        if let groupAnim = anim as? CAAnimationGroup {
             for subAnim in groupAnim.animations! as [CAAnimation]{
                 
-                var delay : CGFloat = 0
+                var delay: CGFloat = 0
                 if let instDelay = (subAnim.value(forKey: "instanceDelay") as? NSNumber)?.floatValue{
-                    delay = CGFloat(instDelay) * CGFloat(sublayersCount - 1);
+                    delay = CGFloat(instDelay) * CGFloat(sublayersCount - 1)
                 }
-                var repeatCountDuration : CGFloat = 0;
+                var repeatCountDuration: CGFloat = 0
                 if subAnim.repeatCount > 1 {
-                    repeatCountDuration = CGFloat(subAnim.duration) * CGFloat(subAnim.repeatCount-1);
+                    repeatCountDuration = CGFloat(subAnim.duration) * CGFloat(subAnim.repeatCount - 1)
                 }
-                var duration : CGFloat = 0;
+                var duration: CGFloat = 0
                 
-                duration = CGFloat(subAnim.beginTime) + (subAnim.autoreverses ? CGFloat(subAnim.duration) : CGFloat(0)) + delay + CGFloat(subAnim.duration) + CGFloat(repeatCountDuration);
-                maxDuration = max(duration, maxDuration);
+                duration = CGFloat(subAnim.beginTime) + (subAnim.autoreverses ? CGFloat(subAnim.duration) : CGFloat(0)) + delay + CGFloat(subAnim.duration) + CGFloat(repeatCountDuration)
+                maxDuration = max(duration, maxDuration)
             }
         }
         
         if maxDuration.isInfinite {
             maxDuration = 1000
         }
-        
         return CFTimeInterval(maxDuration);
     }
     
-    class func updateValueFromAnimations(forLayers layers: [CALayer]){
+    class func updateValueFromAnimations(forLayers layers: [CALayer]) {
+        
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         
         for aLayer in layers{
-            if let keys = aLayer.animationKeys() as [String]?{
+            if let keys = aLayer.animationKeys() as [String]? {
                 for animKey in keys{
                     let anim = aLayer.animation(forKey: animKey)
-                    updateValue(forAnimation: anim!, theLayer: aLayer);
+                    updateValue(forAnimation: anim!, theLayer: aLayer)
                 }
             }
-            
         }
         
         CATransaction.commit()
@@ -107,11 +102,11 @@ public class TTUtils {
             if (!basicAnim.autoreverses) {
                 theLayer.setValue(basicAnim.toValue, forKeyPath: basicAnim.keyPath!)
             }
-        }else if let keyAnim = anim as? CAKeyframeAnimation{
+        } else if let keyAnim = anim as? CAKeyframeAnimation{
             if (!keyAnim.autoreverses) {
                 theLayer.setValue(keyAnim.values?.last, forKeyPath: keyAnim.keyPath!)
             }
-        }else if let groupAnim = anim as? CAAnimationGroup{
+        } else if let groupAnim = anim as? CAAnimationGroup{
             for subAnim in groupAnim.animations! as [CAAnimation]{
                 updateValue(forAnimation: subAnim, theLayer: theLayer);
                 
@@ -120,12 +115,12 @@ public class TTUtils {
     }
     
     class func updateValueFromPresentationLayer(forAnimation anim: CAAnimation!, theLayer : CALayer){
-        if let basicAnim = anim as? CABasicAnimation{
+        if let basicAnim = anim as? CABasicAnimation {
             theLayer.setValue(theLayer.presentation()?.value(forKeyPath: basicAnim.keyPath!), forKeyPath: basicAnim.keyPath!)
-        }else if let keyAnim = anim as? CAKeyframeAnimation{
+        } else if let keyAnim = anim as? CAKeyframeAnimation {
             theLayer.setValue(theLayer.presentation()?.value(forKeyPath: keyAnim.keyPath!), forKeyPath: keyAnim.keyPath!)
-        }else if let groupAnim = anim as? CAAnimationGroup{
-            for subAnim in groupAnim.animations! as [CAAnimation]{
+        } else if let groupAnim = anim as? CAAnimationGroup {
+            for subAnim in groupAnim.animations! as [CAAnimation] {
                 updateValueFromPresentationLayer(forAnimation: subAnim, theLayer: theLayer)
             }
         }
@@ -134,7 +129,7 @@ public class TTUtils {
 
 extension Collection where Indices.Iterator.Element == Index {
     
-    /// Returns the element at the specified index iff it is within bounds, otherwise nil.
+// Возвращает элемент с указанным индексом, если он находится в пределах границ, иначе пусто
     subscript (safe index: Index) -> Iterator.Element? {
         return indices.contains(index) ? self[index] : nil
     }
@@ -142,8 +137,8 @@ extension Collection where Indices.Iterator.Element == Index {
 
 extension Bundle {
     public static func sw_frameworkBundle() -> Bundle {
-        let bundle = Bundle(for: TTUtils.self)
-        if let path = bundle.path(forResource: "TTFortuneWheel", ofType: "bundle") {
+        let bundle = Bundle(for: Utils.self)
+        if let path = bundle.path(forResource: "FortuneWheel", ofType: "bundle") {
             return Bundle(path: path)!
         }
         else {
@@ -151,13 +146,3 @@ extension Bundle {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
