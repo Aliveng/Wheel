@@ -118,7 +118,6 @@ public class Utils {
 }
 
 extension Collection where Indices.Iterator.Element == Index {
-    
 // Возвращает элемент с указанным индексом, если он находится в пределах границ, иначе пусто
     subscript (safe index: Index) -> Iterator.Element? {
         return indices.contains(index) ? self[index] : nil

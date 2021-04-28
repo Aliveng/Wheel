@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// Вид колеса согласно дизайну
 public class LilacWheelSlice: SpinningWheelSliceProtocol {
     
     public enum Style {
