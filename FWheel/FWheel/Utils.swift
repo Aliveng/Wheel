@@ -48,8 +48,7 @@ public class Utils {
     class func maxDuration(ofEffectAnimation anim: CAAnimation, sublayersCount : NSInteger) -> CFTimeInterval{
         var maxDuration: CGFloat = 0
         if let groupAnim = anim as? CAAnimationGroup {
-            for subAnim in groupAnim.animations! as [CAAnimation]{
-                
+            for subAnim in groupAnim.animations! as [CAAnimation] {
                 var delay: CGFloat = 0
                 if let instDelay = (subAnim.value(forKey: "instanceDelay") as? NSNumber)?.floatValue{
                     delay = CGFloat(instDelay) * CGFloat(sublayersCount - 1)

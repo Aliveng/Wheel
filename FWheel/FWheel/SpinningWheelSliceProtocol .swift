@@ -41,8 +41,8 @@ public protocol SpinningWheelSliceProtocol {
 
 extension SpinningWheelSliceProtocol {
     
-    public func drawAdditionalGraphics(in context: CGContext, circularSegmentHeight: CGFloat,radius: CGFloat,sliceDegree: CGFloat) { }
-    
+    public func drawAdditionalGraphics(in context: CGContext, circularSegmentHeight: CGFloat,radius: CGFloat,sliceDegree: CGFloat) {
+    }
     public var fontSize: CGFloat { return 18.0 }
     public var fontColor: UIColor { return UIColor.black }
     public var font: UIFont { return UIFont.systemFont(ofSize: fontSize, weight: .regular) }

@@ -18,7 +18,7 @@
 		0F30954D26353B2900BABD8B /* SpinningWheelAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F30954C26353B2900BABD8B /* SpinningWheelAnimator.swift */; };
 		0F30955226353BFD00BABD8B /* SpinningWheelSliceProtocol .swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F30955126353BFD00BABD8B /* SpinningWheelSliceProtocol .swift */; };
 		0F30955726353CFF00BABD8B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F30955626353CFF00BABD8B /* Utils.swift */; };
-		0F30956226353DBC00BABD8B /* SpinningWheelSliceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F30956126353DBC00BABD8B /* SpinningWheelSliceImpl.swift */; };
+		0F30956226353DBC00BABD8B /* FortuneWheelSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F30956126353DBC00BABD8B /* FortuneWheelSlice.swift */; };
 		0F30956A2635408900BABD8B /* LilacWheelSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3095692635408900BABD8B /* LilacWheelSlice.swift */; };
 		0F30957326354A8000BABD8B /* Lobster_1.3.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0F30956F26354A8000BABD8B /* Lobster_1.3.otf */; };
 		0F30957426354A8000BABD8B /* Chunkfive.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0F30957026354A8000BABD8B /* Chunkfive.otf */; };
@@ -65,7 +65,7 @@
 		0F30954C26353B2900BABD8B /* SpinningWheelAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningWheelAnimator.swift; sourceTree = "<group>"; };
 		0F30955126353BFD00BABD8B /* SpinningWheelSliceProtocol .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpinningWheelSliceProtocol .swift"; sourceTree = "<group>"; };
 		0F30955626353CFF00BABD8B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		0F30956126353DBC00BABD8B /* SpinningWheelSliceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinningWheelSliceImpl.swift; sourceTree = "<group>"; };
+		0F30956126353DBC00BABD8B /* FortuneWheelSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortuneWheelSlice.swift; sourceTree = "<group>"; };
 		0F3095692635408900BABD8B /* LilacWheelSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LilacWheelSlice.swift; sourceTree = "<group>"; };
 		0F30956F26354A8000BABD8B /* Lobster_1.3.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Lobster_1.3.otf; sourceTree = "<group>"; };
 		0F30957026354A8000BABD8B /* Chunkfive.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chunkfive.otf; sourceTree = "<group>"; };
@@ -128,9 +128,9 @@
 				0F3095092635392E00BABD8B /* AppDelegate.swift */,
 				0F30950D2635392E00BABD8B /* ViewController.swift */,
 				0F30954C26353B2900BABD8B /* SpinningWheelAnimator.swift */,
-				0F30954226353A0400BABD8B /* FortuneWheelLayer.swift */,
 				0F30955126353BFD00BABD8B /* SpinningWheelSliceProtocol .swift */,
-				0F30956126353DBC00BABD8B /* SpinningWheelSliceImpl.swift */,
+				0F30954226353A0400BABD8B /* FortuneWheelLayer.swift */,
+				0F30956126353DBC00BABD8B /* FortuneWheelSlice.swift */,
 				0F30954726353A6800BABD8B /* FortuneWheel.swift */,
 				0F3095692635408900BABD8B /* LilacWheelSlice.swift */,
 				0F30955626353CFF00BABD8B /* Utils.swift */,
@@ -321,7 +321,7 @@
 				0F30956A2635408900BABD8B /* LilacWheelSlice.swift in Sources */,
 				0F30950E2635392E00BABD8B /* ViewController.swift in Sources */,
 				0F30950A2635392E00BABD8B /* AppDelegate.swift in Sources */,
-				0F30956226353DBC00BABD8B /* SpinningWheelSliceImpl.swift in Sources */,
+				0F30956226353DBC00BABD8B /* FortuneWheelSlice.swift in Sources */,
 				0F30955226353BFD00BABD8B /* SpinningWheelSliceProtocol .swift in Sources */,
 				0F30954826353A6800BABD8B /* FortuneWheel.swift in Sources */,
 				0F30955726353CFF00BABD8B /* Utils.swift in Sources */,

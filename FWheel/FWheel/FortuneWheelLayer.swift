@@ -11,9 +11,9 @@ import CoreGraphics
 
 open class FortuneWheelLayer: CALayer  {
     
-    // Используется для центрирования рисунка таким образом, чтобы смещенная графика(например, Тени, внешние свечения) не обрезалась
+    // Используется для центрирования рисунка таким образом, чтобы смещенная графика(например, тень) не обрезалась
     // Может быть увеличен до любого размера
-    open var layerInsets:UIEdgeInsets = UIEdgeInsets(top: -50, left: -50, bottom: -50, right: -50)
+    open var layerInsets: UIEdgeInsets = UIEdgeInsets(top: -50, left: -50, bottom: -50, right: -50)
     
     var mainFrame: CGRect!
     weak var parent: FortuneWheel!
@@ -39,7 +39,7 @@ open class FortuneWheelLayer: CALayer  {
         super.draw(in: ctx)
         
         guard parent.slices != nil else {
-            assert(false, "Slices parameter not set.")
+            assert(false, "Slices parameter not set")
             return
         }
         UIGraphicsPushContext(ctx)
@@ -60,16 +60,16 @@ open class FortuneWheelLayer: CALayer  {
         // Отрисовка секторов
         var rotation: CGFloat = initialOffset
         parent.slices.enumerated().forEach { (index,element) in
-            if let previousSlice = parent.slices[safe:(index - 1)] {
-                rotation += (degree(of:previousSlice) + degree(of:element)) / 2
+            if let previousSlice = parent.slices[safe: (index - 1)] {
+                rotation += (degree(of: previousSlice) + degree(of: element)) / 2
             }
-            self.drawSlice(withIndex: index, in: context, forSlice: element,rotation:rotation)
+            self.drawSlice(withIndex: index, in: context, forSlice: element, rotation: rotation)
         }
         
         // Дополнительная графика
         parent.slices.enumerated().forEach { (index,element) in
             self.drawAdditionalGraphics(in: context, rotation: rotation, for: element)
-            let previousSlice:SpinningWheelSliceProtocol = parent.slices[safe:(index - 1)] ?? element
+            let previousSlice:SpinningWheelSliceProtocol = parent.slices[safe: (index - 1)] ?? element
             rotation += degree(of:previousSlice)
         }
         

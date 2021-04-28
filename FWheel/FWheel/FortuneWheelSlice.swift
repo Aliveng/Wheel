@@ -1,5 +1,5 @@
 //
-//  SpinningWheelSliceImpl.swift
+//  FortuneWheelSlice.swift
 //  FWheel
 //
 //  Created by Татьяна Севостьянова on 25.04.2021.
