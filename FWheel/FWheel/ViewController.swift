@@ -66,10 +66,10 @@ class ViewController: UIViewController {
         let spinningWheel = FortuneWheel(frame: .zero, slices: [])
         
         let slices = [ LilacWheelSlice.init(title: "42 %"),
-                       LilacWheelSlice.init(title: "15 %"), // Сектор который будет выбран
+                       LilacWheelSlice.init(title: "15 %"), // Сектор который будет выбран (исходно)
                        LilacWheelSlice.init(title: "Название"),
                        LilacWheelSlice.init(title: "42 %"),
-                       LilacWheelSlice.init(title: "скидка 6%"),
+                       LilacWheelSlice.init(title: "скидка 6%"), // При измененных настройках Выбор тут
                        LilacWheelSlice.init(title: "Название"),
                        LilacWheelSlice.init(title: "42 %"),
                        LilacWheelSlice.init(title: "скидка 5%")]

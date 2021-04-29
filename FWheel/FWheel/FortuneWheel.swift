@@ -68,7 +68,7 @@ public class FortuneWheel: UIControl, CAAnimationDelegate, SpinningAnimatorProto
         wheelLayer.setNeedsDisplay()
     }
     
-    internal var defaultShadow:NSShadow {
+    internal var defaultShadow: NSShadow {
         let shadow = NSShadow()
         shadow.shadowColor = UIColor.black.withAlphaComponent(0.4)
         shadow.shadowOffset = CGSize(width: 0, height: 0)
