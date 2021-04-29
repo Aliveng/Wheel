@@ -20,12 +20,14 @@ public class LilacWheelSlice: SpinningWheelSliceProtocol {
     public var title: String
     public var degree: CGFloat = 0.0
     
-    public var backgroundColor: UIColor? {
-        switch style {
-        case .sliceOne: return UIColor.green
-        case .sliceTwo: return UIColor.yellow
-        }
-    }
+//    public var backgroundColor: UIColor? {
+//        switch style {
+//        case .sliceOne: return UIColor.green
+//        case .sliceTwo: return UIColor.yellow
+//        }
+//    }
+    
+    public var backgroundColor: UIColor? = UIColor.clear
     
 //    public var fontColor: UIColor {
 //        return UIColor.white
@@ -48,13 +50,14 @@ public class LilacWheelSlice: SpinningWheelSliceProtocol {
     
     public var style: Style = .sliceOne
     
-    public init(title: String, fontColor: UIColor) {
+    public init(title: String, fontColor: UIColor, backgroundColor: UIColor) {
         self.title = title
         self.fontColor = fontColor
+        self.backgroundColor = backgroundColor
     }
     
-    public convenience init(title:String, degree:CGFloat, fontColor: UIColor) {
-        self.init(title: title, fontColor: fontColor)
+    public convenience init(title:String, degree:CGFloat, fontColor: UIColor, backgroundColor: UIColor) {
+        self.init(title: title, fontColor: fontColor, backgroundColor: backgroundColor)
         self.degree = degree
     }
 }

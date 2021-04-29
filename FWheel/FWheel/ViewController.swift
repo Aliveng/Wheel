@@ -66,14 +66,14 @@ class ViewController: UIViewController {
     lazy var spinningWheel: FortuneWheel = {
         let spinningWheel = FortuneWheel(frame: .zero, slices: [])
         
-        let slices = [ LilacWheelSlice.init(title: "42 %", fontColor: .red),
-                       LilacWheelSlice.init(title: "15 %", fontColor: .orange), // Сектор который будет выбран (исходно)
-                       LilacWheelSlice.init(title: "Название", fontColor: .magenta),
-                       LilacWheelSlice.init(title: "42 %", fontColor: .blue),
-                       LilacWheelSlice.init(title: "скидка 6%", fontColor: .magenta), // При измененных настройках Выбор тут
-                       LilacWheelSlice.init(title: "Название", fontColor: .gray),
-                       LilacWheelSlice.init(title: "42 %", fontColor: .cyan),
-                       LilacWheelSlice.init(title: "скидка 5%", fontColor: .black)]
+        let slices = [ LilacWheelSlice.init(title: "42 %", fontColor: .red, backgroundColor: .green),
+                       LilacWheelSlice.init(title: "15 %", fontColor: .orange, backgroundColor: .gray), // Сектор который будет выбран (исходно)
+                       LilacWheelSlice.init(title: "Название", fontColor: .magenta, backgroundColor: .white),
+                       LilacWheelSlice.init(title: "42 %", fontColor: .blue, backgroundColor: .yellow),
+                       LilacWheelSlice.init(title: "скидка 6%", fontColor: .magenta, backgroundColor: .black), // При измененных настройках Выбор тут
+                       LilacWheelSlice.init(title: "Название", fontColor: .gray, backgroundColor: .brown),
+                       LilacWheelSlice.init(title: "42 %", fontColor: .cyan, backgroundColor: .orange),
+                       LilacWheelSlice.init(title: "скидка 5%", fontColor: .black, backgroundColor: .cyan)]
         
         spinningWheel.slices = slices
         spinningWheel.equalSlices = true
