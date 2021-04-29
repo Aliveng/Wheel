@@ -15,7 +15,7 @@ public class FortuneWheel: UIControl, CAAnimationDelegate, SpinningAnimatorProto
     open var slices: [SpinningWheelSliceProtocol]!
     
     // Настройки основного фрейма
-    open var frameStroke: StrokeInfo = StrokeInfo(color: .borderWheel, width: 8)
+    open var frameStroke: StrokeInfo = StrokeInfo(color: UIColor.blue, width: 8)
     open var shadow: NSShadow?
     
     // Установите значение, чтобы начать рисовать с таким смешением

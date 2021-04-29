@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import FortuneWheel
 
 
 class ViewController: UIViewController {
@@ -65,14 +66,14 @@ class ViewController: UIViewController {
     lazy var spinningWheel: FortuneWheel = {
         let spinningWheel = FortuneWheel(frame: .zero, slices: [])
         
-        let slices = [ LilacWheelSlice.init(title: "42 %"),
-                       LilacWheelSlice.init(title: "15 %"), // Сектор который будет выбран (исходно)
-                       LilacWheelSlice.init(title: "Название"),
-                       LilacWheelSlice.init(title: "42 %"),
-                       LilacWheelSlice.init(title: "скидка 6%"), // При измененных настройках Выбор тут
-                       LilacWheelSlice.init(title: "Название"),
-                       LilacWheelSlice.init(title: "42 %"),
-                       LilacWheelSlice.init(title: "скидка 5%")]
+        let slices = [ LilacWheelSlice.init(title: "42 %", fontColor: .red),
+                       LilacWheelSlice.init(title: "15 %", fontColor: .orange), // Сектор который будет выбран (исходно)
+                       LilacWheelSlice.init(title: "Название", fontColor: .magenta),
+                       LilacWheelSlice.init(title: "42 %", fontColor: .blue),
+                       LilacWheelSlice.init(title: "скидка 6%", fontColor: .magenta), // При измененных настройках Выбор тут
+                       LilacWheelSlice.init(title: "Название", fontColor: .gray),
+                       LilacWheelSlice.init(title: "42 %", fontColor: .cyan),
+                       LilacWheelSlice.init(title: "скидка 5%", fontColor: .black)]
         
         spinningWheel.slices = slices
         spinningWheel.equalSlices = true

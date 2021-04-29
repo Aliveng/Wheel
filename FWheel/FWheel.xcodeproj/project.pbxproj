@@ -13,13 +13,6 @@
 		0F3095162635392F00BABD8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F3095142635392F00BABD8B /* LaunchScreen.storyboard */; };
 		0F3095212635392F00BABD8B /* FWheelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3095202635392F00BABD8B /* FWheelTests.swift */; };
 		0F30952C2635392F00BABD8B /* FWheelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F30952B2635392F00BABD8B /* FWheelUITests.swift */; };
-		0F30954326353A0400BABD8B /* FortuneWheelLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F30954226353A0400BABD8B /* FortuneWheelLayer.swift */; };
-		0F30954826353A6800BABD8B /* FortuneWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F30954726353A6800BABD8B /* FortuneWheel.swift */; };
-		0F30954D26353B2900BABD8B /* SpinningWheelAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F30954C26353B2900BABD8B /* SpinningWheelAnimator.swift */; };
-		0F30955226353BFD00BABD8B /* SpinningWheelSliceProtocol .swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F30955126353BFD00BABD8B /* SpinningWheelSliceProtocol .swift */; };
-		0F30955726353CFF00BABD8B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F30955626353CFF00BABD8B /* Utils.swift */; };
-		0F30956226353DBC00BABD8B /* FortuneWheelSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F30956126353DBC00BABD8B /* FortuneWheelSlice.swift */; };
-		0F30956A2635408900BABD8B /* LilacWheelSlice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3095692635408900BABD8B /* LilacWheelSlice.swift */; };
 		0F30957326354A8000BABD8B /* Lobster_1.3.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0F30956F26354A8000BABD8B /* Lobster_1.3.otf */; };
 		0F30957426354A8000BABD8B /* Chunkfive.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0F30957026354A8000BABD8B /* Chunkfive.otf */; };
 		0F30957526354A8000BABD8B /* Phosphate.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 0F30957126354A8000BABD8B /* Phosphate.ttc */; };
@@ -28,6 +21,7 @@
 		0F3095922636AA8A00BABD8B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3095912636AA8A00BABD8B /* Colors.swift */; };
 		0F3095972636AAA200BABD8B /* UIColor+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3095962636AAA200BABD8B /* UIColor+extensions.swift */; };
 		0F30959F2636BC9F00BABD8B /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F30959E2636BC9F00BABD8B /* Images.swift */; };
+		0FE856AE263AC92F002FD299 /* FortuneWheel in Frameworks */ = {isa = PBXBuildFile; productRef = 0FE856AD263AC92F002FD299 /* FortuneWheel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,13 +54,6 @@
 		0F3095272635392F00BABD8B /* FWheelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FWheelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F30952B2635392F00BABD8B /* FWheelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FWheelUITests.swift; sourceTree = "<group>"; };
 		0F30952D2635392F00BABD8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0F30954226353A0400BABD8B /* FortuneWheelLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortuneWheelLayer.swift; sourceTree = "<group>"; };
-		0F30954726353A6800BABD8B /* FortuneWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FortuneWheel.swift; sourceTree = "<group>"; };
-		0F30954C26353B2900BABD8B /* SpinningWheelAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinningWheelAnimator.swift; sourceTree = "<group>"; };
-		0F30955126353BFD00BABD8B /* SpinningWheelSliceProtocol .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpinningWheelSliceProtocol .swift"; sourceTree = "<group>"; };
-		0F30955626353CFF00BABD8B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		0F30956126353DBC00BABD8B /* FortuneWheelSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FortuneWheelSlice.swift; sourceTree = "<group>"; };
-		0F3095692635408900BABD8B /* LilacWheelSlice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LilacWheelSlice.swift; sourceTree = "<group>"; };
 		0F30956F26354A8000BABD8B /* Lobster_1.3.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Lobster_1.3.otf; sourceTree = "<group>"; };
 		0F30957026354A8000BABD8B /* Chunkfive.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Chunkfive.otf; sourceTree = "<group>"; };
 		0F30957126354A8000BABD8B /* Phosphate.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Phosphate.ttc; sourceTree = "<group>"; };
@@ -74,6 +61,7 @@
 		0F3095912636AA8A00BABD8B /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		0F3095962636AAA200BABD8B /* UIColor+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+extensions.swift"; sourceTree = "<group>"; };
 		0F30959E2636BC9F00BABD8B /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		0FE856A5263AC8F7002FD299 /* FortuneWheel */ = {isa = PBXFileReference; lastKnownFileType = folder; path = FortuneWheel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FE856AE263AC92F002FD299 /* FortuneWheel in Frameworks */,
 				0F30958726355B3A00BABD8B /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,10 +94,12 @@
 		0F3094FD2635392E00BABD8B = {
 			isa = PBXGroup;
 			children = (
+				0FE856A5263AC8F7002FD299 /* FortuneWheel */,
 				0F3095082635392E00BABD8B /* FWheel */,
 				0F30951F2635392F00BABD8B /* FWheelTests */,
 				0F30952A2635392F00BABD8B /* FWheelUITests */,
 				0F3095072635392E00BABD8B /* Products */,
+				0FE856AC263AC92F002FD299 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,13 +118,6 @@
 			children = (
 				0F3095092635392E00BABD8B /* AppDelegate.swift */,
 				0F30950D2635392E00BABD8B /* ViewController.swift */,
-				0F30954C26353B2900BABD8B /* SpinningWheelAnimator.swift */,
-				0F30955126353BFD00BABD8B /* SpinningWheelSliceProtocol .swift */,
-				0F30954226353A0400BABD8B /* FortuneWheelLayer.swift */,
-				0F30956126353DBC00BABD8B /* FortuneWheelSlice.swift */,
-				0F30954726353A6800BABD8B /* FortuneWheel.swift */,
-				0F3095692635408900BABD8B /* LilacWheelSlice.swift */,
-				0F30955626353CFF00BABD8B /* Utils.swift */,
 				0F3095912636AA8A00BABD8B /* Colors.swift */,
 				0F30959E2636BC9F00BABD8B /* Images.swift */,
 				0F3095962636AAA200BABD8B /* UIColor+extensions.swift */,
@@ -174,6 +158,13 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		0FE856AC263AC92F002FD299 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -192,6 +183,7 @@
 			name = FWheel;
 			packageProductDependencies = (
 				0F30958626355B3A00BABD8B /* SnapKit */,
+				0FE856AD263AC92F002FD299 /* FortuneWheel */,
 			);
 			productName = FWheel;
 			productReference = 0F3095062635392E00BABD8B /* FWheel.app */;
@@ -313,18 +305,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F30954D26353B2900BABD8B /* SpinningWheelAnimator.swift in Sources */,
 				0F30959F2636BC9F00BABD8B /* Images.swift in Sources */,
 				0F3095922636AA8A00BABD8B /* Colors.swift in Sources */,
-				0F30954326353A0400BABD8B /* FortuneWheelLayer.swift in Sources */,
 				0F3095972636AAA200BABD8B /* UIColor+extensions.swift in Sources */,
-				0F30956A2635408900BABD8B /* LilacWheelSlice.swift in Sources */,
 				0F30950E2635392E00BABD8B /* ViewController.swift in Sources */,
 				0F30950A2635392E00BABD8B /* AppDelegate.swift in Sources */,
-				0F30956226353DBC00BABD8B /* FortuneWheelSlice.swift in Sources */,
-				0F30955226353BFD00BABD8B /* SpinningWheelSliceProtocol .swift in Sources */,
-				0F30954826353A6800BABD8B /* FortuneWheel.swift in Sources */,
-				0F30955726353CFF00BABD8B /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,6 +651,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0F30958526355B3A00BABD8B /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		0FE856AD263AC92F002FD299 /* FortuneWheel */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FortuneWheel;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

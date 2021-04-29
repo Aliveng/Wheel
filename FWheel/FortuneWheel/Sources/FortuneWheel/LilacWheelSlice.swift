@@ -22,14 +22,16 @@ public class LilacWheelSlice: SpinningWheelSliceProtocol {
     
     public var backgroundColor: UIColor? {
         switch style {
-        case .sliceOne: return .sliceOne
-        case .sliceTwo: return .sliceTwo
+        case .sliceOne: return UIColor.green
+        case .sliceTwo: return UIColor.yellow
         }
     }
     
-    public var fontColor: UIColor {
-        return UIColor.white
-    }
+//    public var fontColor: UIColor {
+//        return UIColor.white
+//    }
+    
+    public var fontColor: UIColor = UIColor.clear
     
     public var offsetFromExterior: CGFloat { // отступ надписей внутри сектора от края колеса
         return 18.0
@@ -46,12 +48,13 @@ public class LilacWheelSlice: SpinningWheelSliceProtocol {
     
     public var style: Style = .sliceOne
     
-    public init(title: String) {
+    public init(title: String, fontColor: UIColor) {
         self.title = title
+        self.fontColor = fontColor
     }
     
-    public convenience init(title:String, degree:CGFloat) {
-        self.init(title:title)
+    public convenience init(title:String, degree:CGFloat, fontColor: UIColor) {
+        self.init(title: title, fontColor: fontColor)
         self.degree = degree
     }
 }
