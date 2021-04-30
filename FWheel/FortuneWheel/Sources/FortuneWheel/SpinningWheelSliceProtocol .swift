@@ -11,7 +11,7 @@ import UIKit
 public struct StrokeInfo {
     public var color: UIColor
     public var width: CGFloat
-    
+
     public init(color: UIColor, width: CGFloat) {
         self.color = color
         self.width = width

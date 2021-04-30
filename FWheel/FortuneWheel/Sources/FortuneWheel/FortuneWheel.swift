@@ -15,7 +15,7 @@ public class FortuneWheel: UIControl, CAAnimationDelegate, SpinningAnimatorProto
     open var slices: [SpinningWheelSliceProtocol]!
     
     // Настройки основного фрейма
-    open var frameStroke: StrokeInfo = StrokeInfo(color: UIColor.blue, width: 8)
+    open var frameStroke: StrokeInfo = StrokeInfo(color: UIColor.gray, width: 8)
     open var shadow: NSShadow?
     
     // Установите значение, чтобы начать рисовать с таким смешением
@@ -81,18 +81,10 @@ public class FortuneWheel: UIControl, CAAnimationDelegate, SpinningAnimatorProto
         return self.wheelLayer
     }
     
-//    open func startAnimating(rotationCompletionOffset: CGFloat = 0.0, _ completion:((Bool) -> Void)?) {
-//        self.stopAnimating()
-//        self.animator.addRotationAnimation(completionBlock: completion, rotationOffset: rotationCompletionOffset)
-//    }
-    
     open func startAnimating(fininshIndex: Int = 0, _ completion:((Bool) -> Void)?) {
-//        let rotation = 360.0 - computeRadian(from: fininshIndex)
-//        self.startAnimating(rotationCompletionOffset: rotation, completion)
     }
     
     open func startAnimating() {
-    //    self.animator.addIndefiniteRotationAnimation()
         self.animator.addRotationAnimation()
     }
     
@@ -101,8 +93,6 @@ public class FortuneWheel: UIControl, CAAnimationDelegate, SpinningAnimatorProto
     }
     
     open func startAnimating(fininshIndex: Int = 0, offset: CGFloat, _ completion:((Bool) -> Void)?) {
-//        let rotation = 360.0 - computeRadian(from: fininshIndex) + offset
-//        self.startAnimating(rotationCompletionOffset: rotation, completion)
     }
     
     private func computeRadian(from finishIndex: Int) -> CGFloat {

@@ -94,7 +94,6 @@ open class FortuneWheelLayer: CALayer  {
     
     // Отрисовка графики
     open func drawSlice(withIndex index:Int, in context:CGContext, forSlice slice:SpinningWheelSliceProtocol, rotation:CGFloat) {
-        
         // Объявление констант
         let sectionWidthDegrees = degree(of: slice)
         let kTitleOffset: CGFloat = slice.offsetFromExterior

@@ -12,30 +12,12 @@ import UIKit
 // Вид колеса согласно дизайну
 public class LilacWheelSlice: SpinningWheelSliceProtocol {
     
-    public enum Style {
-        case sliceOne
-        case sliceTwo
-    }
-    
     public var title: String
     public var degree: CGFloat = 0.0
-    
-//    public var backgroundColor: UIColor? {
-//        switch style {
-//        case .sliceOne: return UIColor.green
-//        case .sliceTwo: return UIColor.yellow
-//        }
-//    }
-    
     public var backgroundColor: UIColor? = UIColor.clear
-    
-//    public var fontColor: UIColor {
-//        return UIColor.white
-//    }
-    
     public var fontColor: UIColor = UIColor.clear
     
-    public var offsetFromExterior: CGFloat { // отступ надписей внутри сектора от края колеса
+    public var offsetFromExterior: CGFloat { // отступ надписи сектора от края колеса
         return 18.0
     }
     
@@ -47,8 +29,6 @@ public class LilacWheelSlice: SpinningWheelSliceProtocol {
 //        case .sliceTwo: return UIFont(name: "", size: 20.0)!
 //        }
     }
-    
-    public var style: Style = .sliceOne
     
     public init(title: String, fontColor: UIColor, backgroundColor: UIColor) {
         self.title = title
