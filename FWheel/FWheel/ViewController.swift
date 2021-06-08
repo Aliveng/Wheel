@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         label.alpha = 1
         label.textColor = .lightGray
         label.textAlignment = .center
-        label.text = "Колесо Фартуны"
+        label.text = "Wheel of fortune"
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         label.numberOfLines = 0
         return label
@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         label.alpha = 0.9
         label.textColor = .lightGray
         label.textAlignment = .center
-        label.text = "Описание подсказки в несколько строк.\nВы можете крутить колесо фартуны и участвовать в акциях"
+        label.text = "Click in the center!"
         label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
         label.numberOfLines = 0
         return label
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.setTitle("", for: .normal)
         button.frame = CGRect(x: spinningWheel.center.x, y: spinningWheel.center.y, width: 50, height: 50)
-        button.layer.borderWidth = 1
+        button.layer.borderWidth = 2
         button.layer.borderColor = UIColor.gray.cgColor
         button.layer.cornerRadius = 25
         button.addTarget(self, action: #selector(didTapRotateButton), for: .touchUpInside)
@@ -73,22 +73,22 @@ class ViewController: UIViewController {
                        LilacWheelSlice.init(title: "15 %",
                                             fontColor: .cyan,
                                             backgroundColor: .systemPurple),
-                       LilacWheelSlice.init(title: "Название",
+                       LilacWheelSlice.init(title: "wow",
                                             fontColor: .white,
                                             backgroundColor: .systemPink),
                        LilacWheelSlice.init(title: "42 %",
                                             fontColor: .red,
                                             backgroundColor: .systemOrange),
-                       LilacWheelSlice.init(title: "скидка 6%", // Выбранный сектор
+                       LilacWheelSlice.init(title: "discount 6%", // Выбранный сектор
                                             fontColor: .orange,
                                             backgroundColor: .yellow),
-                       LilacWheelSlice.init(title: "Название",
+                       LilacWheelSlice.init(title: "perfectly",
                                             fontColor: .magenta,
                                             backgroundColor: .systemGreen),
                        LilacWheelSlice.init(title: "42 %",
                                             fontColor: .yellow,
                                             backgroundColor: .lightGray),
-                       LilacWheelSlice.init(title: "скидка 5%",
+                       LilacWheelSlice.init(title: "discount 5%",
                                             fontColor: .blue,
                                             backgroundColor: .cyan)]
         

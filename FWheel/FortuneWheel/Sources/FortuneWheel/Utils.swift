@@ -123,15 +123,14 @@ extension Collection where Indices.Iterator.Element == Index {
     }
 }
 
-extension Bundle {
-    public static func sw_frameworkBundle() -> Bundle {
-        let bundle = Bundle(for: Utils.self)
-        if let path = bundle.path(forResource: "FortuneWheel", ofType: "bundle") {
-            return Bundle(path: path)!
-        }
-        else {
-            return bundle
-        }
-    }
-}
-
+//extension Bundle {
+//    public static func sw_frameworkBundle() -> Bundle {
+//        let bundle = Bundle(for: Utils.self)
+//        if let path = bundle.path(forResource: "FortuneWheel", ofType: "bundle") {
+//            return Bundle(path: path)!
+//        }
+//        else {
+//            return bundle
+//        }
+//    }
+//}
